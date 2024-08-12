@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>IDEC Wiki</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+        }
+
+        .tint-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        @keyframes hueShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            background: linear-gradient(270deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+            background-size: 300% 300%;
+            animation: hueShift 20s ease infinite;
+            padding: 0.625rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo-placeholder {
+            width: 3.125rem;
+            height: 3.125rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .nav-links a, .dropdown > span {
+            color: white;
+            text-decoration: none;
+            font-size: 1.125rem;
+            padding: 0.3125rem 0.625rem;
+            white-space: nowrap;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover, .dropdown:hover > span {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(249, 249, 249, 0.9);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(241, 241, 241, 0.9);
+        }
+
+        #root {
+            width: 90%;
+            max-width: 50rem;
+            margin: 1.25rem auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        button {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .navbar {
+                padding: 0.625rem 2.5%;
+            }
+
+            .nav-links {
+                gap: 0.625rem;
+            }
+
+            .nav-links a, .dropdown > span {
+                font-size: 1rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            #root {
+                width: 95%;
+                padding: 0.938rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                margin-top: 0.625rem;
+                flex-wrap: wrap;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        #root div::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #root div::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        #root div::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        #root div::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+      .video-background {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline class="video-background">
+        <source src="96platevid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <nav class="navbar">
+        <div class="logo-placeholder">LOGO</div>
+        <div class="nav-links">
+            <a href="homepage.html">Home</a>
+            <div class="dropdown">
+                <span>Project</span>
+                <div class="dropdown-content">
+                    <a href="Description-project.html">Description</a>
+                    <a href="Results-project.html">Results</a>
+                    <a href="Workflow-project.html">Workflow and methods</a>
+                    <a href="Supplementary.html">Supplementary</a>
+                </div>
+            </div>
+            <a href="team.html">Team</a>
+            <a href="documentation.html">Documentation</a>
+            <a href="Humanpractices.html">Human practices</a>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const months = ['July', 'August', 'September'];
+
+        const labData = {
+            July: [
+                "Week 1: Started experiment A<br><br>Notes:<br>- Prepared lab equipment<br>- Initiated cell cultures",
+                "Week 2: Collected initial data<br><br>Results:<br>- Growth rate: 0.5 μm/hour<br>- Viability: 95%",
+                // ... other weeks
+            ],
+            August:[
+                "Week 1: ",
+                "Week 2: ",
+            ],
+            September:[
+                
+            ],
+        };
+
+        const SimpleLabNotebook = () => {
+            const [currentMonth, setCurrentMonth] = React.useState('July');
+            const [currentPage, setCurrentPage] = React.useState(0);
+            const [notebookContent, setNotebookContent] = React.useState(
+                Object.fromEntries(
+                    Object.entries(labData).map(([month, pages]) => [
+                        month,
+                        pages.map(content => ({ __html: content.replace(/\n/g, '<br>') }))
+                    ])
+                )
+            );
+
+            const handleContentChange = (event) => {
+                const newContent = event.target.innerHTML;
+                setNotebookContent(prevContent => ({
+                    ...prevContent,
+                    [currentMonth]: prevContent[currentMonth].map((content, index) => 
+                        index === currentPage ? { __html: newContent } : content
+                    )
+                }));
+            };
+
+            const nextPage = () => {
+                if (currentPage < notebookContent[currentMonth].length - 1) {
+                    setCurrentPage(currentPage + 1);
+                } else {
+                    const nextMonthIndex = months.indexOf(currentMonth) + 1;
+                    if (nextMonthIndex < months.length) {
+                        setCurrentMonth(months[nextMonthIndex]);
+                        setCurrentPage(0);
+                    }
+                }
+            };
+
+            const prevPage = () => {
+                if (currentPage > 0) {
+                    setCurrentPage(currentPage - 1);
+                } else {
+                    const prevMonthIndex = months.indexOf(currentMonth) - 1;
+                    if (prevMonthIndex >= 0) {
+                        setCurrentMonth(months[prevMonthIndex]);
+                        setCurrentPage(notebookContent[months[prevMonthIndex]].length - 1);
+                    }
+                }
+            };
+
+            return (
+                <div>
+                    <h1 style={{marginBottom: '1rem'}}>Lab Notebook</h1>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                        {months.map((month) => (
+                            <button
+                                key={month}
+                                onClick={() => { setCurrentMonth(month); setCurrentPage(0); }}
+                                style={{
+                                    padding: '0.625rem',
+                                    backgroundColor: month === currentMonth ? '#007bff' : '#f0f0f0',
+                                    color: month === currentMonth ? 'white' : 'black',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                {month}
+                            </button>
+                        ))}
+                    </div>
+                    <div style={{
+                        border: '3px solid black',
+                        borderRadius: '5px',
+                        padding: '1.25rem',
+                        background: 'linear-gradient(to bottom, transparent 23px, #ccc 24px)',
+                        backgroundSize: '100% 24px',
+                        lineHeight: '24px',
+                        textAlign: 'left',
+                        fontFamily: 'Times New Roman, serif',
+                        fontSize: '1rem',
+                        position: 'relative',
+                        minHeight: '600px',
+                        width: '800px',
+                        maxWidth: '90%',
+                        margin: '0 auto',
+                    }}>
+                        <h2 style={{ 
+                            marginTop: '0', 
+                            marginBottom: '24px', 
+                            background: 'white', 
+                            display: 'inline-block', 
+                            padding: '0 10px', 
+                            position: 'relative', 
+                            top: '-10px', 
+                            left: '-10px' 
+                        }}>
+                            {currentMonth}
+                        </h2>
+                        <div 
+                            contentEditable
+                            dangerouslySetInnerHTML={notebookContent[currentMonth][currentPage]}
+                            onInput={handleContentChange}
+                            style={{ 
+                                margin: '0', 
+                                paddingBottom: '24px',
+                                minHeight: '300px',
+                                outline: 'none',
+                                whiteSpace: 'pre-wrap',
+                                wordBreak: 'break-word',
+                                overflowWrap: 'break-word'
+                            }}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.25rem' }}>
+                        <button onClick={prevPage} disabled={currentMonth === 'July' && currentPage === 0}
+                            style={{ padding: '0.625rem', backgroundColor: '#f0f0f0', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                            Previous Page
+                        </button>
+                        <span>Page {currentPage + 1}/{notebookContent[currentMonth].length}</span>
+                        <button onClick={nextPage} disabled={currentMonth === 'September' && currentPage === notebookContent['September'].length - 1}
+                            style={{ padding: '0.625rem', backgroundColor: '#f0f0f0', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                            Next Page
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<SimpleLabNotebook />, document.getElementById('root'));
+    </script>
+</body>
+</html>
