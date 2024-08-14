@@ -15,39 +15,28 @@
         }
 
         body {
-            font-family:Arial, Helvetica, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 16px;
             line-height: 1.5;
             color: #333;
         }
 
-        .tint-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-
-        @keyframes hueShift {
+     @keyframes purpleHueShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
         .navbar {
-            background-color:#874ccc;
-            background-size: 300% 300%;
-            animation: hueShift 20s ease infinite;
+            background: linear-gradient(45deg, #4a0e78, #874ccc, #c27ba0, #874ccc, #4a0e78);
+            background-size: 400% 400%;
+            animation: purpleHueShift 15s ease infinite;
             padding: 0.625rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .logo-placeholder {
             width: 3.125rem;
             height: 3.125rem;
@@ -202,7 +191,7 @@
 
         #container > div{
             font-size:20px;
-            font-family:Arial, Helvetica, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 20px;
             padding: 20px;
             width: 300px;
