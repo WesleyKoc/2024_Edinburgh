@@ -19,28 +19,21 @@
             font-size: 16px;
             line-height: 1.5;
             color: #333;
+            background-color: #f0f0f0;  /* Added a light background color */
         }
 
-        .tint-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
 
-        @keyframes hueShift {
+        @keyframes purpleHueShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
         .navbar {
-            background-color:#874ccc;
-            background-size: 300% 300%;
-            animation: hueShift 20s ease infinite;
+
+            background: linear-gradient(45deg, #4a0e78, #874ccc, #c27ba0, #874ccc, #4a0e78);
+            background-size: 400% 400%;
+            animation: purpleHueShift 15s ease infinite;
             padding: 0.625rem 5%;
             display: flex;
             justify-content: space-between;
@@ -120,11 +113,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        button {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1rem;
-        }
-
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
@@ -170,40 +158,9 @@
                 display: block;
             }
         }
-
-        #root div::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #root div::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        #root div::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-
-        #root div::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-      .video-background {
-    object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -2;
-}
     </style>
 </head>
 <body>
-    <video autoplay muted loop playsinline class="video-background">
-        <source src="96platevid.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
     <nav class="navbar">
         <div class="logo-placeholder">LOGO</div>
         <div class="nav-links">
@@ -217,7 +174,7 @@
                     <a href="Supplementary.html">Supplementary</a>
                 </div>
             </div>
-            <a href="team.html">Team</a>
+            <a href="docs/Team/teampage.html">Team</a>
             <a href="documentation.html">Documentation</a>
             <a href="Humanpractices.html">Human practices</a>
         </div>
@@ -233,8 +190,6 @@
                 "Week 1: Started experiment A<br><br>Notes:<br>- Prepared lab equipment<br>- Initiated cell cultures",
                 "Week 2: Collected initial data<br><br>Results:<br>- Growth rate: 0.5 μm/hour<br>- Viability: 95%",
                 "Week 3: ",
-                "Week 4: <br><br><strong> Testing <a href="https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/0471142727.mb0803s51\">epPCR protocol</a> for Ag43</strong><br><br>PCR mixture prepared according to protocol<br>Results: no visible bands produced by Ag43 primers, CsgA primers produced were extremely faint at the correct band size that smeared with primers at the bottom of the gel<br><br>Total epPCR mixture volumes for protocol troubleshooting reduced from 100µL to 25µL<br><br>Controls to test:<br>- Taq polymerase: Run standard PCR using Taq polymerase to test for Taq polymerase stability<br>- Lower temperatures: Reducing annealing temperatures down to 55ºc by intervals of 2ºc from 67ºc<br>- MnCl<sub>2<sub> addition times: Adding at the same time as other components against adding immediately before thermocycling begins<br>- Primers: Running standard PCR using confirmed fully functional Q5 polymerase<br>- Template DNA concentration: Reducing plasmid concentration in mixture<br><br>Results for controls:<br>- Taq polymerase: Taq polymerase fully functional under manufacturer's instructions<br>- Lower temperatures: epPCR under annealing temperatures of 65ºc, 63ºc, 61ºc, 59ºc, 57ºc, 55ºc did not produce any visible bands for Ag43<br>- MnCl<sub>2<sub> addition times: No bands produced regardless of addition time<br>- Primers: Standard PCR with Q5 produced clear distinct bands at correct gene product sizes<br>- Template DNA concentration: Plasmid concentration on protocol worked on other standard PCR protocols, produced clear distinct bands when products are run on gels",
-                // ... other weeks
             ],
             August:[
                 "Week 1:<br><br><strong>Continued finalising epPCR protocol details for Ag43</strong><br><br>MgCl<sub>2</sub> final concentrations:<br>- 5mM<br>- 3mM<br>- 1mM<br><br>MnCl<sub>2</sub> final concentrations:<br>- 0.25mM<br>- 0.1mM<br>- 0.075mM<br>- 0.05mM<br>- 0.025mM<br>- 0.01mM<br><br>Results from gel electrophoresis of epPCR products:<br>- All concentrations for MgCl<sub>2</sub> produced distinct bands at 1.5kb range with no smearing<br>- No bands produced for MnCl<sub>2</sub> at 0.25mM<br>- Very faint band at 1.5kb range with no smears produced by 0.1mM MnCl<sub>2</sub><br>- MnCl<sub>2</sub> at concentrations 0.075mM, 0.05mM, 0.025mM, and 0.01mM produced distinct bands with no smearing",
