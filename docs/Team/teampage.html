@@ -4,99 +4,8 @@
     <title>Edinburgh IDEC 2024 Team</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family:'Times New Roman', Times, serif;
-            font-size: 16px;
-            line-height: 1.5;
-            color: #333;
-            background-color: ghostwhite;
-        }
-
-     @keyframes purpleHueShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .navbar {
-            background: linear-gradient(45deg, #4a0e78, #874ccc, #c27ba0, #874ccc, #4a0e78);
-            background-size: 400% 400%;
-            animation: purpleHueShift 15s ease infinite;
-            padding: 0.625rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .logo-placeholder {
-            width: 3.125rem;
-            height: 3.125rem;
-            background-color: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            border-radius: 50%;
-        }
-
-         .nav-links {
-            display: flex;
-            gap: 1.25rem;
-            align-items: center;
-        }
-
-        .nav-links a, .dropdown > span {
-            color: white;
-            text-decoration: none;
-            font-size: 1.125rem;
-            padding: 0.3125rem 0.625rem;
-            white-space: nowrap;
-            transition: background-color 0.3s;
-        }
-
-        .nav-links a:hover, .dropdown:hover > span {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: rgba(249, 249, 249, 0.9);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 5px;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(241, 241, 241, 0.9);
-        }
-
         h1, h2 {
             text-align: center;
             margin: 40px 0 20px;
@@ -306,7 +215,18 @@
             </div>
         </div>
     </div>
-
+<footer class="end-section">
+        <div class="location-container">
+            <h2 class="map-header">Our Location</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.3080769841813!2d-3.177915484069889!3d55.92155432744188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7619777d9b7%3A0xfc241ebbe5c7a678!2sPeter%20Wilson%20Building%2C%20W%20Mains%20Rd%2C%20Edinburgh%20EH9%203JG%2C%20UK!5e0!3m2!1sen!2sus!4v1692648542208!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="supporters-container">
+            <h2 class="supporters-header">Our Supporters</h2>
+            <img src="Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
+        </div>
+    </footer>
     
 </body>
 </html>
