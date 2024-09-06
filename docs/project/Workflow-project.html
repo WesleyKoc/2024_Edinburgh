@@ -1,10 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Project Workflow</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-<link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <title>Project Workflow</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+    <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <style>
+        /* Base styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+/* Updated navbar styles */
+.navbar {
+    z-index: 2000;
+        }
+
+
+/* Intro container styles */
+.intro-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: ghostwhite;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+    padding-top: 60px;
+}
+
+.intro-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.intro-node {
+    fill: #00a8ff;
+    stroke: #fff;
+    stroke-width: 2;
+    filter: url(#glow);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s ease-out;
+}
+
+.intro-connection {
+    stroke: #00a8ff;
+    stroke-width: 1;
+    filter: url(#glow);
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 2s ease-out;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.intro-node, .intro-connection {
+    animation: pulse 3s infinite;
+}
+
+.intro-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: black;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+/* Main content styles */
+.main-content {
+    position: relative;
+    z-index: 1;
+    background-color: ghostwhite;
+    min-height: 100vh;
+    padding-top: 100vh; /* To offset for the intro container */
+}
+
+/* Workflow container styles */
+.workflow-container {
+    width: 100%;
+    min-height: 1500px;
+    background-color: ghostwhite;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.workflow-svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Node styles */
+.node {
+    fill: #00a8ff;
+    stroke: #fff;
+    stroke-width: 2;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.node:hover {
+    fill: #0077ff;
+}
+
+.node-text {
+    fill: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+/* Connection styles */
+.node-group {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.connection {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 1s ease-in-out;
+     stroke: black;
+    stroke-width: 2;
+    fill: none;
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 1001;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.popup-content {
+    color: #666;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+/* Additional styles for responsiveness */
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 3rem;
+    }
+
+    .node-text {
+        font-size: 12px;
+    }
+}
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -25,22 +204,448 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
-    <main class="content-section">
-        <div class="content-placeholder">Add content here</div>
-    </main>
 
-    <footer class="end-section">
-        <div class="location-container">
-            <h2 class="map-header">Our Location</h2>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.3080769841813!2d-3.177915484069889!3d55.92155432744188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7619777d9b7%3A0xfc241ebbe5c7a678!2sPeter%20Wilson%20Building%2C%20W%20Mains%20Rd%2C%20Edinburgh%20EH9%203JG%2C%20UK!5e0!3m2!1sen!2sus!4v1692648542208!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="intro-container" id="introContainer">
+        <svg id="intro-svg" viewBox="0 0 1000 600" class="intro-svg">
+            <defs>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <!-- Intro SVG content will be dynamically added here -->
+        </svg>
+        <h1 class="intro-title">Our Workflow</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="workflow-container">
+            <svg id="workflow-svg" viewBox="-150 0 1700 2200" class="workflow-svg">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                    refX="0" refY="3.5" orient="auto">
+                      <polygon points="0 0, 10 3.5, 0 7" fill="#000000" />
+                    </marker>
+                </defs>
+                <g class="connections">
+                        <!-- Main Connections -->
+                <path d="M700 100 L700 300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 300 L700 500" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 500 L900 600" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 500 L900 750" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 500 L900 900" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 1200 L600 1300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 1200 L800 1300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 1200 L600 1300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 1200 L800 1300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M600 1300 L450 1300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M800 1300 L950 1300" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M450 1300 L450 1450" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M950 1300 L950 1450" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M450 1450 L600 1450" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M600 1450 L600 1600" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M450 1600 L600 1600" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M450 1600 L450 1750" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M450 1750 L600 1750" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M600 1750 L600 1900" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M600 1900 L600 2050" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M800 1450 L950 1450" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M800 1450 L800 1600" class="connection" marker-end="url(#arrowhead)" />
+                <!-- Left side connections -->
+                <path d="M700 500 L500 600" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M700 500 L500 750" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M500 600 L300 500" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M500 600 L300 700" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M500 750 L300 800" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M500 750 L300 900" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M300 700 L100 700" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M100 700 L0 600" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M100 700 L0 800" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M0 800 L0 900" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M300 900 L0 900" class="connection" marker-end="url(#arrowhead)" />
+                
+                <!-- Right Sub-connections -->
+                <path d="M900 600 L1100 500" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M900 600 L1100 700" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M900 750 L1100 800" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M900 750 L1100 900" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M900 900 L1100 1000" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M900 900 L1100 1100" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M1100 700 L1300 750" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M1100 800 L1300 750" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M1300 750 L1500 675" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M1300 750 L1500 825" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M1100 1100 L1500 1100" class="connection" marker-end="url(#arrowhead)" />
+                <path d="M1500 825 L1500 1100" class="connection" marker-end="url(#arrowhead)" />
+                
+                <!-- Connection from Step 23 to Step 28 -->
+                <path d="M1500 1100 L700 1200" class="connection" marker-end="url(#arrowhead)" />
+                
+                <!-- Connection from Step 27 to Step 28 -->
+                <path d="M0 900 L700 1200" class="connection" marker-end="url(#arrowhead)" />
+                </g>
+                <g class="nodes">
+                     <g id="node1" class="node-group">
+                    <circle cx="700" cy="100" r="60" class="node" />
+                    <text x="700" y="100" dy=".3em" class="node-text">Directed Evolution</text>
+                </g>
+                <g id="node2" class="node-group">
+                    <circle cx="700" cy="300" r="60" class="node" />
+                    <text x="700" y="300" dy=".3em" class="node-text">Step 2</text>
+                </g>
+                <g id="node3" class="node-group">
+                    <circle cx="700" cy="500" r="60" class="node" />
+                    <text x="700" y="500" dy=".3em" class="node-text">Step 3</text>
+                </g>
+                <g id="node4" class="node-group">
+                    <circle cx="900" cy="600" r="50" class="node" />
+                    <text x="900" y="600" dy=".3em" class="node-text">Step 4</text>
+                </g>
+                <g id="node5" class="node-group">
+                    <circle cx="900" cy="750" r="50" class="node" />
+                    <text x="900" y="750" dy=".3em" class="node-text">Step 5</text>
+                </g>
+                <g id="node6" class="node-group">
+                    <circle cx="900" cy="900" r="50" class="node" />
+                    <text x="900" y="900" dy=".3em" class="node-text">Step 6</text>
+                </g>
+                <g id="node8" class="node-group">
+                    <circle cx="500" cy="600" r="50" class="node" />
+                    <text x="500" y="600" dy=".3em" class="node-text">Step 8</text>
+                </g>
+                <g id="node9" class="node-group">
+                    <circle cx="500" cy="750" r="50" class="node" />
+                    <text x="500" y="750" dy=".3em" class="node-text">Step 9</text>
+                </g>
+                
+                <!-- Right Sub-nodes -->
+                <g id="node10" class="node-group">
+                    <circle cx="1100" cy="500" r="40" class="node subnode" />
+                    <text x="1100" y="500" dy=".3em" class="node-text">Step 10</text>
+                </g>
+                <g id="node11" class="node-group">
+                    <circle cx="1100" cy="700" r="40" class="node subnode" />
+                    <text x="1100" y="700" dy=".3em" class="node-text">Step 11</text>
+                </g>
+                <g id="node12" class="node-group">
+                    <circle cx="1100" cy="800" r="40" class="node subnode" />
+                    <text x="1100" y="800" dy=".3em" class="node-text">Step 12</text>
+                </g>
+                <g id="node13" class="node-group">
+                    <circle cx="1100" cy="900" r="40" class="node subnode" />
+                    <text x="1100" y="900" dy=".3em" class="node-text">Step 13</text>
+                </g>
+                <g id="node14" class="node-group">
+                    <circle cx="1100" cy="1000" r="40" class="node subnode" />
+                    <text x="1100" y="1000" dy=".3em" class="node-text">Step 14</text>
+                </g>
+                <g id="node15" class="node-group">
+                    <circle cx="1100" cy="1100" r="40" class="node subnode" />
+                    <text x="1100" y="1100" dy=".3em" class="node-text">Step 15</text>
+                </g>
+                
+                <!-- Left Sub-nodes -->
+                <g id="node16" class="node-group">
+                    <circle cx="300" cy="500" r="40" class="node subnode" />
+                    <text x="300" y="500" dy=".3em" class="node-text">Step 16</text>
+                </g>
+                <g id="node17" class="node-group">
+                    <circle cx="300" cy="700" r="40" class="node subnode" />
+                    <text x="300" y="700" dy=".3em" class="node-text">Step 17</text>
+                </g>
+                <g id="node18" class="node-group">
+                    <circle cx="300" cy="800" r="40" class="node subnode" />
+                    <text x="300" y="800" dy=".3em" class="node-text">Step 18</text>
+                </g>
+                <g id="node19" class="node-group">
+                    <circle cx="300" cy="900" r="40" class="node subnode" />
+                    <text x="300" y="900" dy=".3em" class="node-text">Step 19</text>
+                </g>
+                <g id="node20" class="node-group">
+                    <circle cx="1300" cy="750" r="40" class="node subsubnode" />
+                    <text x="1300" y="750" dy=".3em" class="node-text">Step 20</text>
+                </g>
+                <g id="node21" class="node-group">
+                    <circle cx="1500" cy="675" r="40" class="node subsubnode" />
+                    <text x="1500" y="675" dy=".3em" class="node-text">Step 21</text>
+                </g>
+                <g id="node22" class="node-group">
+                    <circle cx="1500" cy="825" r="40" class="node subsubnode" />
+                    <text x="1500" y="825" dy=".3em" class="node-text">Step 22</text>
+                </g>
+                <g id="node23" class="node-group">
+                    <circle cx="1500" cy="1100" r="40" class="node subsubnode" />
+                    <text x="1500" y="1100" dy=".3em" class="node-text">Step 23</text>
+                </g>
+                <g id="node24" class="node-group">
+                    <circle cx="100" cy="700" r="40" class="node subnode" />
+                    <text x="100" y="700" dy=".3em" class="node-text">Step 24</text>
+                </g>
+                <g id="node25" class="node-group">
+                    <circle cx="0" cy="600" r="40" class="node subsubnode" />
+                    <text x="0" y="600" dy=".3em" class="node-text">Step 25</text>
+                </g>
+                <g id="node26" class="node-group">
+                    <circle cx="0" cy="800" r="40" class="node subsubnode" />
+                    <text x="0" y="800" dy=".3em" class="node-text">Step 26</text>
+                </g>
+                <g id="node27" class="node-group">
+                    <circle cx="0" cy="900" r="40" class="node subsubnode" />
+                    <text x="0" y="900" dy=".3em" class="node-text">Step 27</text>
+                </g>
+                <g id="node28" class="node-group">
+                    <circle cx="700" cy="1200" r="60" class="node" />
+                    <text x="700" y="1200" dy=".3em" class="node-text">Step 28</text>
+                </g>
+                <g id="node29" class="node-group">
+                    <circle cx="600" cy="1300" r="60" class="node" />
+                    <text x="600" y="1300" dy=".3em" class="node-text">Step 29</text>
+                </g>
+                <g id="node30" class="node-group">
+                    <circle cx="800" cy="1300" r="60" class="node" />
+                    <text x="800" y="1300" dy=".3em" class="node-text">Step 30</text>
+                </g>
+                <g id="node31" class="node-group">
+                    <circle cx="450" cy="1300" r="60" class="node" />
+                    <text x="450" y="1300" dy=".3em" class="node-text">Step 31</text>
+                </g>
+                <g id="node32" class="node-group">
+                    <circle cx="950" cy="1300" r="60" class="node" />
+                    <text x="950" y="1300" dy=".3em" class="node-text">Step 32</text>
+                </g>
+                <g id="node33" class="node-group">
+                    <circle cx="450" cy="1450" r="60" class="node" />
+                    <text x="450" y="1450" dy=".3em" class="node-text">Step 33</text>
+                </g>
+                <g id="node34" class="node-group">
+                    <circle cx="950" cy="1450" r="60" class="node" />
+                    <text x="950" y="1450" dy=".3em" class="node-text">Step 34</text>
+                </g>
+                 <g id="node35" class="node-group">
+                    <circle cx="600" cy="1450" r="60" class="node" />
+                    <text x="600" y="1450" dy=".3em" class="node-text">Step 35</text>
+                </g>
+                <g id="node36" class="node-group">
+                    <circle cx="600" cy="1600" r="60" class="node" />
+                    <text x="600" y="1600" dy=".3em" class="node-text">Step 36</text>
+                </g>
+                <g id="node37" class="node-group">
+                    <circle cx="450" cy="1600" r="60" class="node" />
+                    <text x="450" y="1600" dy=".3em" class="node-text">Step 37</text>
+                </g>
+                <g id="node38" class="node-group">
+                    <circle cx="450" cy="1750" r="60" class="node" />
+                    <text x="450" y="1750" dy=".3em" class="node-text">Step 38</text>
+                </g>
+                <g id="node39" class="node-group">
+                    <circle cx="600" cy="1750" r="60" class="node" />
+                    <text x="600" y="1750" dy=".3em" class="node-text">Step 39</text>
+                </g>
+                <g id="node40" class="node-group">
+                    <circle cx="600" cy="1900" r="60" class="node" />
+                    <text x="600" y="1900" dy=".3em" class="node-text">Step 40</text>
+                </g>
+                <g id="node41" class="node-group">
+                    <circle cx="600" cy="2050" r="60" class="node" />
+                    <text x="600" y="2050" dy=".3em" class="node-text">Step 41</text>
+                </g>
+                <g id="node42" class="node-group">
+                    <circle cx="800" cy="1450" r="60" class="node" />
+                    <text x="800" y="1450" dy=".3em" class="node-text">Step 42</text>
+                </g>
+                <g id="node43" class="node-group">
+                    <circle cx="800" cy="1600" r="60" class="node" />
+                    <text x="800" y="1600" dy=".3em" class="node-text">Step 43</text>
+                </g>
+                </g>
+            </svg>
+        </div>
+
+        <div id="popup" class="popup">
+            <span class="close-btn">&times;</span>
+            <h2 id="popup-title"></h2>
+            <div id="popup-content" class="popup-content"></div>
+        </div>
+
+        <footer class="end-section">
+            <div class="location-container">
+                <h2 class="map-header">Our Location</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.3080769841813!2d-3.177915484069889!3d55.92155432744188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7619777d9b7%3A0xfc241ebbe5c7a678!2sPeter%20Wilson%20Building%2C%20W%20Mains%20Rd%2C%20Edinburgh%20EH9%203JG%2C%20UK!5e0!3m2!1sen!2sus!4v1692648542208!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
-        </div>
-        <div class="supporters-container">
-            <h2 class="supporters-header">Our Supporters</h2>
-            <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
-        </div>
-    </footer>
-</body>
+            <div class="supporters-container">
+                <h2 class="supporters-header">Our Supporters</h2>
+                <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
+            </div>
+        </footer>
+    </div>
 
+    <script>
+        // Intro animation nodes
+const introNodes = [
+    { x: 500, y: 300 }, { x: 200, y: 150 }, { x: 800, y: 150 },
+    { x: 200, y: 450 }, { x: 800, y: 450 }, { x: 350, y: 100 },
+    { x: 650, y: 100 }, { x: 350, y: 500 }, { x: 650, y: 500 },
+    { x: 100, y: 300 }, { x: 900, y: 300 }, { x: 400, y: 200 },
+    { x: 600, y: 200 }, { x: 400, y: 400 }, { x: 600, y: 400 },
+];
+
+// Create intro connections
+function createIntroConnections(nodes) {
+    return nodes.flatMap((node, i) => 
+        nodes.slice(i + 1).map(otherNode => `
+            <line 
+                x1="${node.x}" y1="${node.y}"
+                x2="${otherNode.x}" y2="${otherNode.y}"
+                class="intro-connection"
+            />
+        `)
+    ).join('');
+}
+
+// Create intro nodes
+function createIntroNodes(nodes) {
+    return nodes.map((node, index) => `
+        <circle 
+            cx="${node.x}" cy="${node.y}" r="20" 
+            class="intro-node"
+        />
+    `).join('');
+}
+
+// Add intro SVG content
+const introSvg = document.getElementById('intro-svg');
+introSvg.innerHTML += createIntroConnections(introNodes) + createIntroNodes(introNodes);
+
+// Animate intro
+function animateIntro() {
+    const introNodeElements = document.querySelectorAll('.intro-node');
+    const introLines = document.querySelectorAll('.intro-connection');
+
+    introNodeElements.forEach((node, index) => {
+        setTimeout(() => {
+            node.style.opacity = 1;
+            node.style.transform = 'scale(1)';
+        }, index * 100);
+    });
+
+    introLines.forEach((line, index) => {
+        setTimeout(() => {
+            line.style.strokeDashoffset = '0';
+        }, index * 50);
+    });
+
+    setTimeout(() => {
+        document.querySelector('.intro-title').style.opacity = 1;
+        document.querySelector('.intro-title').style.transform = 'translate(-50%, -50%) translateY(-20px)';
+    }, introNodeElements.length * 100 + introLines.length * 50 + 500);
+}
+
+// Scroll behavior
+const introContainer = document.querySelector('.intro-container');
+window.addEventListener('scroll', () => {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > window.innerHeight / 2) {
+        introContainer.style.opacity = '0';
+        introContainer.style.pointerEvents = 'none';
+    } else {
+        introContainer.style.opacity = '1';
+        introContainer.style.pointerEvents = 'auto';
+    }
+});
+
+// Popup functionality
+const nodes = document.querySelectorAll('.node-group');
+const popup = document.getElementById('popup');
+const popupTitle = document.getElementById('popup-title');
+const popupContent = document.getElementById('popup-content');
+const closeBtn = document.querySelector('.close-btn');
+
+// Sample data for each step (replace with your actual data)
+const stepInfo = {
+    "Directed Evolution": "This is the first step in our process...",
+    "Step 2": "In this step, we focus on...",
+    // Add information for all other steps yeahhh
+};
+
+nodes.forEach((node) => {
+    node.addEventListener('click', (e) => {
+        const stepName = node.querySelector('.node-text').textContent;
+        popupTitle.textContent = stepName;
+        popupContent.textContent = stepInfo[stepName] || "Information about this step is not available.";
+        popup.style.display = 'block';
+        e.stopPropagation();
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+
+document.addEventListener('click', (e) => {
+    if (e.target !== popup && !popup.contains(e.target)) {
+        popup.style.display = 'none';
+    }
+});
+
+// Initialize
+window.addEventListener('load', () => {
+    introContainer.style.opacity = '1';
+    introContainer.style.pointerEvents = 'auto';
+    animateIntro(); // Call the intro animation function
+});
+// Workflow animation
+function animateWorkflow() {
+    const nodes = document.querySelectorAll('.node-group');
+    const connections = document.querySelectorAll('.connection');
+
+    // Reset styles
+    nodes.forEach(node => {
+        node.style.opacity = '0';
+        node.style.transform = 'scale(0)';
+    });
+    connections.forEach(conn => {
+        conn.style.strokeDasharray = conn.getTotalLength();
+        conn.style.strokeDashoffset = conn.getTotalLength();
+    });
+
+    // Animate nodes
+    nodes.forEach((node, index) => {
+        setTimeout(() => {
+            node.style.transition = 'opacity 0.5s, transform 0.5s';
+            node.style.opacity = '1';
+            node.style.transform = 'scale(1)';
+        }, index * 50);
+    });
+
+    // Animate connections
+    setTimeout(() => {
+        connections.forEach((conn, index) => {
+            setTimeout(() => {
+                conn.style.transition = 'stroke-dashoffset 1s ease-in-out';
+                conn.style.strokeDashoffset = '0';
+            }, index * 20);
+        });
+    }, nodes.length * 50);
+}
+
+// Intersection Observer for workflow animation
+const workflowContainer = document.querySelector('.workflow-container');
+const workflowObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateWorkflow();
+            workflowObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+workflowObserver.observe(workflowContainer);
+    </script>
+</body>
 </html>
