@@ -5,6 +5,173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
 <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+<style>
+    .quotes-container {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    .quote-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+    }
+    .quote-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .quote-item:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    .photo-box {
+        width: 40%;
+        padding: 0 1rem;
+    }
+    .photo-container {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .photo-glow {
+        position: absolute;
+        inset: 0;
+        background-color: #60A5FA;
+        border-radius: 50%;
+        opacity: 0.75;
+        filter: blur(15px);
+        animation: pulse 2s infinite;
+    }
+    .photo-img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 60%;
+    }
+    .quotes-box {
+        width: 65%;
+        padding: 2.0rem;
+        background-color: #F3F4F6;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .quote-text {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+    }
+    .quote-text.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .quote-author {
+        text-align: right;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+    }
+  .photo-container {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+        perspective: 1000px;
+        position: relative;
+    }
+    .photo-flipper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
+    .photo-container:hover .photo-flipper {
+        transform: rotateY(180deg);
+    }
+    .photo-front, .photo-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(0, 150, 255, 0.5);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+    .photo-container:hover .photo-front,
+    .photo-container:hover .photo-back {
+        box-shadow: 0 0 25px rgba(0, 150, 255, 0.8);
+    }
+    .photo-front::before, .photo-back::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        z-index: -1;
+        filter: blur(15px);
+        background-size: 400%;
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 50%;
+    }
+    .photo-container:hover .photo-front::before,
+    .photo-container:hover .photo-back::before {
+        opacity: 1;
+    }
+    @keyframes glowing {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+    }
+    .photo-back {
+        background-color: #F3F4F6;
+        transform: rotateY(180deg);
+        padding: 20px;
+        text-align: center;
+    }
+    .photo-back-content {
+        font-size: 0.9rem;
+        z-index: 1;
+    }
+    .photo-img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        z-index: 1;
+    }
+    /* Pulsating animation for constant attention */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .photo-container::after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0,150,255,0.3) 0%, rgba(0,150,255,0) 70%);
+        z-index: -1;
+        animation: pulse 2s infinite;
+    }
+</style>
 </head>
 <body>
     <nav class="navbar">
@@ -25,9 +192,14 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
-    <main class="content-section">
-        <div class="content-placeholder">Add content here</div>
+
+    <main>
+        <div class="quotes-container">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Stakeholder Perspectives</h2>
+            <div id="quotes-list"></div>
+        </div>
     </main>
+
     <footer class="end-section">
         <div class="location-container">
             <h2 class="map-header">Our Location</h2>
@@ -40,5 +212,100 @@
             <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
         </div>
     </footer>
+
+    <script>
+        const quotes = [
+            { 
+                id: 1, 
+                author: "Roger", 
+                photo: "/2024_Edinburgh/docs/img/roger.jpeg",
+                info: "Renowned musician and directed evolution enthusiast",
+                quotes: [
+                    "Great lads",
+                    "The importance of conducting directed evolution on these two proteins crucial for plastic adherence cannot be understated"
+                ]
+            },
+            { 
+                id: 2, 
+                author: "Jeff", 
+                photo: "/2024_Edinburgh/docs/img/jeff.jpeg",
+                info: "World-class musician and science enthusiast",
+                quotes: [
+                    "The project is nearly as good as my playing",
+                    "I would give them a private performance for their work on Antigen 43 and Curli Subunit-CsgA"
+                ]
+            },
+            { 
+                id: 3, 
+                author: "Katalin", 
+                photo: "/2024_Edinburgh/docs/img/katalin.jpeg",
+                info: "Nobel laureate in biochemistry",
+                quotes: [
+                    "Give 'em the Nobel",
+                    "One of the greatest projects of the 21st century",
+                ]
+            },
+        ];
+
+        function createQuoteElement(quoteData) {
+            const quoteItem = document.createElement('div');
+            quoteItem.className = 'quote-item';
+            
+            const quotesHtml = quoteData.quotes.map(quote => `
+                <p class="quote-text">"${quote}"</p>
+            `).join('');
+
+            quoteItem.innerHTML = `
+                <div class="photo-box">
+                    <div class="photo-container">
+                        <div class="photo-flipper">
+                            <div class="photo-front">
+                                <div class="photo-glow"></div>
+                                <img src="${quoteData.photo}" alt="${quoteData.author}" class="photo-img">
+                            </div>
+                            <div class="photo-back">
+                                <div class="photo-back-content">
+                                    <h3>${quoteData.author}</h3>
+                                    <p>${quoteData.info}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quotes-box">
+                    ${quotesHtml}
+                    <p class="quote-author">- ${quoteData.author}</p>
+                </div>
+            `;
+            return quoteItem;
+        }
+
+        function animateQuotes() {
+            const quotesList = document.getElementById('quotes-list');
+            quotes.forEach(quoteData => {
+                const quoteElement = createQuoteElement(quoteData);
+                quotesList.appendChild(quoteElement);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.querySelectorAll('.quote-text').forEach((quote, index) => {
+                            setTimeout(() => {
+                                quote.classList.add('visible');
+                            }, index * 300); // Stagger the animation of multiple quotes
+                        });
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.quote-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', animateQuotes);
+    </script>
 </body>
 </html>
