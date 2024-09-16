@@ -4,7 +4,7 @@
 <title>Human Practices</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-<link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+<link rel="stylesheet" href="2024_Edinburgh/css/style.css">
 <style>
     .quotes-container {
         max-width: 1000px;
@@ -171,6 +171,40 @@
         z-index: -1;
         animation: pulse 2s infinite;
     }
+    .quotes-box {
+        width: 65%;
+        padding: 2.0rem;
+        background-color: #F3F4F6;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .quotes-box.expanded {
+        width: 90%;
+        max-width: 800px;
+    }
+
+    .full-transcript {
+        display: none;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #ccc;
+    }
+
+    .full-transcript.visible {
+        display: block;
+    }
+
+    .expand-button {
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+        color: #3B82F6;
+        font-weight: bold;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -213,37 +247,40 @@
         </div>
     </footer>
 
-    <script>
+   <script>
         const quotes = [
             { 
                 id: 1, 
                 author: "Roger", 
-                photo: "/2024_Edinburgh/docs/img/roger.jpeg",
+                photo: "roger.jpeg",
                 info: "Renowned musician and directed evolution enthusiast",
                 quotes: [
                     "Great lads",
                     "The importance of conducting directed evolution on these two proteins crucial for plastic adherence cannot be understated"
-                ]
+                ],
+                fullTranscript: "Full interview transcript with Roger goes here..."
             },
             { 
                 id: 2, 
                 author: "Jeff", 
-                photo: "/2024_Edinburgh/docs/img/jeff.jpeg",
+                photo: "jeff.jpeg",
                 info: "World-class musician and science enthusiast",
                 quotes: [
                     "The project is nearly as good as my playing",
                     "I would give them a private performance for their work on Antigen 43 and Curli Subunit-CsgA"
-                ]
+                ],
+                fullTranscript: "Full interview transcript with Jeff goes here..."
             },
             { 
                 id: 3, 
                 author: "Katalin", 
-                photo: "/2024_Edinburgh/docs/img/katalin.jpeg",
+                photo: "katalin.jpeg",
                 info: "Nobel laureate in biochemistry",
                 quotes: [
                     "Give 'em the Nobel",
                     "One of the greatest projects of the 21st century",
-                ]
+                ],
+                fullTranscript: "Full interview transcript with Katalin goes here..."
             },
         ];
 
@@ -275,8 +312,24 @@
                 <div class="quotes-box">
                     ${quotesHtml}
                     <p class="quote-author">- ${quoteData.author}</p>
+                    <div class="full-transcript">
+                        <h3>Full Interview Transcript</h3>
+                        <p>${quoteData.fullTranscript}</p>
+                    </div>
+                    <span class="expand-button">Click to expand</span>
                 </div>
             `;
+
+            const quotesBox = quoteItem.querySelector('.quotes-box');
+            const fullTranscript = quoteItem.querySelector('.full-transcript');
+            const expandButton = quoteItem.querySelector('.expand-button');
+
+            quotesBox.addEventListener('click', () => {
+                quotesBox.classList.toggle('expanded');
+                fullTranscript.classList.toggle('visible');
+                expandButton.textContent = fullTranscript.classList.contains('visible') ? 'Click to collapse' : 'Click to expand';
+            });
+
             return quoteItem;
         }
 
@@ -294,7 +347,7 @@
                         entry.target.querySelectorAll('.quote-text').forEach((quote, index) => {
                             setTimeout(() => {
                                 quote.classList.add('visible');
-                            }, index * 300); // Stagger the animation of multiple quotes
+                            }, index * 300);
                         });
                     }
                 });
