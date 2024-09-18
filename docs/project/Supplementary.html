@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Supplementary</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-<link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <title>Supplementary</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+    <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+        
+        @keyframes moveArm {
+            0% { transform: rotate(45deg) translateY(0); opacity: 1; }
+            50% { transform: rotate(0deg) translateY(0); opacity: 1; }
+            100% { transform: rotate(0deg) translateY(0); opacity: 0; }
+        }
+        @keyframes ejectDrop {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            50% { transform: translateY(0) scale(1); opacity: 0; }
+            75% { transform: translateY(100px) scale(1); opacity: 1; }
+            100% { transform: translateY(100px) scale(20); opacity: 0; }
+        }
+        @keyframes showText {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .arm { animation: moveArm 4s forwards; }
+        .drop { animation: ejectDrop 4s forwards; }
+        .method-text { 
+            animation: showText 1s forwards; 
+            animation-delay: 3s; 
+            opacity: 0; 
+            font-family: 'Times New Roman', Times, serif;
+            color: black;
+            font-size: 3rem;
+        }
+    </style>
 </head>
 <body>
-   <nav class="navbar">
+    <nav class="navbar">
         <div class="logo-placeholder">LOGO</div>
         <div class="nav-links">
             <a href="/2024_Edinburgh/index.html">Home</a>
@@ -25,9 +58,8 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>   
-    <main class="content-section">
-        <div class="content-placeholder">Add content here</div>
-    </main>
+
+    <div id="methods-content"></div>
 
     <footer class="end-section">
         <div class="location-container">
@@ -41,6 +73,68 @@
             <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
         </div>
     </footer>
-</body>
 
+    <script type="text/babel">
+        const PipetteAnimation = () => (
+            <div className="h-screen flex justify-center items-center bg-gray-100">
+                <svg width="300" height="500" viewBox="0 0 300 500">
+                    <g className="arm" transform-origin="150 150">
+                        <rect x="140" y="50" width="20" height="150" fill="#555" />
+                        <rect x="130" y="190" width="40" height="60" fill="#777" />
+                        <rect x="145" y="250" width="10" height="30" fill="#999" />
+                    </g>
+                    <circle className="drop" cx="150" cy="280" r="5" fill="blue" />
+                </svg>
+                <h1 className="method-text absolute" style={{ top: '60%' }}>Our Methods</h1>
+            </div>
+        );
+
+        const MethodBox = ({ title, description, imageUrl }) => {
+            const [isOpen, setIsOpen] = React.useState(false);
+
+            return (
+                <div 
+                    className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105"
+                    onClick={() => setIsOpen(!isOpen)}
+                    style={{ height: isOpen ? 'auto' : '400px' }}
+                >
+                    <h2 className="text-2xl font-semibold mb-4 text-center">{title}</h2>
+                    <img src={imageUrl} alt={title} className="w-full h-64 object-cover mb-4 rounded" />
+                    {isOpen && <p className="text-lg">{description}</p>}
+                </div>
+            );
+        };
+
+        const MethodsContent = () => {
+            const methods = [
+                { title: "PCR Analysis", description: "Polymerase Chain Reaction (PCR) is a method used to rapidly make millions to billions of copies of a specific DNA sample, allowing scientists to take a very small sample of DNA and amplify it to a large enough amount to study in detail.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Cell Culture", description: "Cell culture is the process by which cells are grown under controlled conditions, generally outside their natural environment. This technique is one of the major tools used in cellular and molecular biology, providing model systems for studying cell biology, tissue physiology, and mechanisms of diseases.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Western Blot", description: "Western blotting is an important technique used in cell and molecular biology. It allows researchers to identify specific proteins from a complex mixture of proteins extracted from cells. The technique uses three elements to accomplish this task: separation by size, transfer to a solid support, and marking target protein using a proper primary and secondary antibody to visualize.", imageUrl: "/api/placeholder/400/300" },
+                { title: "CRISPR", description: "CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) is a family of DNA sequences found in the genomes of prokaryotic organisms such as bacteria and archaea. These sequences are derived from DNA fragments of bacteriophages that had previously infected the prokaryote. They are used to detect and destroy DNA from similar bacteriophages during subsequent infections. In biotechnology, the CRISPR/Cas system is a gene editing technology.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Flow Cytometry", description: "Flow cytometry is a laser-based, biophysical technology employed in cell counting, cell sorting, biomarker detection and protein engineering, by suspending cells in a stream of fluid and passing them by an electronic detection apparatus. It allows simultaneous multiparametric analysis of the physical and chemical characteristics of up to thousands of particles per second.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
+                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
+                
+            ];
+
+            return (
+                <div>
+                    <PipetteAnimation />
+                    <div className="container mx-auto px-4 py-16">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            {methods.map((method, index) => (
+                                <MethodBox key={index} title={method.title} description={method.description} imageUrl={method.imageUrl} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<MethodsContent />, document.getElementById('methods-content'));
+    </script>
+</body>
 </html>
