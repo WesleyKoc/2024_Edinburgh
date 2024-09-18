@@ -34,8 +34,18 @@
             animation-delay: 3s; 
             opacity: 0; 
             font-family: 'Times New Roman', Times, serif;
-            color: black;
-            font-size: 3rem;
+            color: white;
+            font-size: 4.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
     </style>
 </head>
@@ -74,20 +84,26 @@
         </div>
     </footer>
 
-    <script type="text/babel">
+     <script type="text/babel">
         const PipetteAnimation = () => (
-            <div className="h-screen flex justify-center items-center bg-gray-100">
-                <svg width="300" height="500" viewBox="0 0 300 500">
+            <div className="h-screen flex justify-center items-center relative overflow-hidden">
+                <video className="video-background" autoPlay loop muted>
+                    <source src="/2024_Edinburgh/docs/videos/methodsbackgroundvideo.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <div className="absolute inset-0 bg-black opacity-50"></div>
+                <svg width="300" height="500" viewBox="0 0 300 500" className="relative z-10">
                     <g className="arm" transform-origin="150 150">
-                        <rect x="140" y="50" width="20" height="150" fill="#555" />
-                        <rect x="130" y="190" width="40" height="60" fill="#777" />
+                        <rect x="140" y="50" width="20" height="150" fill="#FFFFFF"/>
+                        <rect x="130" y="190" width="40" height="60" fill="#000000" />
                         <rect x="145" y="250" width="10" height="30" fill="#999" />
                     </g>
-                    <circle className="drop" cx="150" cy="280" r="5" fill="blue" />
+                    <circle className="drop" cx="150" cy="280" r="7" fill="blue" />
                 </svg>
-                <h1 className="method-text absolute" style={{ top: '60%' }}>Our Methods</h1>
+                <h1 className="method-text absolute z-10" style={{ top: '40%' }}>Our Methods</h1>
             </div>
         );
+
 
         const MethodBox = ({ title, description, imageUrl }) => {
             const [isOpen, setIsOpen] = React.useState(false);
@@ -107,7 +123,7 @@
 
         const MethodsContent = () => {
             const methods = [
-                { title: "PCR Analysis", description: "Polymerase Chain Reaction (PCR) is a method used to rapidly make millions to billions of copies of a specific DNA sample, allowing scientists to take a very small sample of DNA and amplify it to a large enough amount to study in detail.", imageUrl: "/api/placeholder/400/300" },
+                { title: "PCR Analysis (click to expand)", description: "Polymerase Chain Reaction (PCR) is a method used to rapidly make millions to billions of copies of a specific DNA sample, allowing scientists to take a very small sample of DNA and amplify it to a large enough amount to study in detail.", imageUrl: "/api/placeholder/400/300" },
                 { title: "Cell Culture", description: "Cell culture is the process by which cells are grown under controlled conditions, generally outside their natural environment. This technique is one of the major tools used in cellular and molecular biology, providing model systems for studying cell biology, tissue physiology, and mechanisms of diseases.", imageUrl: "/api/placeholder/400/300" },
                 { title: "Western Blot", description: "Western blotting is an important technique used in cell and molecular biology. It allows researchers to identify specific proteins from a complex mixture of proteins extracted from cells. The technique uses three elements to accomplish this task: separation by size, transfer to a solid support, and marking target protein using a proper primary and secondary antibody to visualize.", imageUrl: "/api/placeholder/400/300" },
                 { title: "CRISPR", description: "CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) is a family of DNA sequences found in the genomes of prokaryotic organisms such as bacteria and archaea. These sequences are derived from DNA fragments of bacteriophages that had previously infected the prokaryote. They are used to detect and destroy DNA from similar bacteriophages during subsequent infections. In biotechnology, the CRISPR/Cas system is a gene editing technology.", imageUrl: "/api/placeholder/400/300" },
@@ -115,12 +131,10 @@
                 { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
                 { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
                 { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
-                
+                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },  
             ];
 
-            return (
+           return (
                 <div>
                     <PipetteAnimation />
                     <div className="container mx-auto px-4 py-16">
