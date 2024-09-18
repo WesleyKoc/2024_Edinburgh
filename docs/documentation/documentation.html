@@ -37,8 +37,8 @@
                 <div class="dropdown-content">
                     <a href="/2024_Edinburgh/docs/project/Description-project.html">Description</a>
                     <a href="/2024_Edinburgh/docs/project/Results-project.html">Results</a>
-                    <a href="/2024_Edinburgh/docs/project/Workflow-project.html">Workflow</a>
-                    <a href="/2024_Edinburgh/docs/project/Supplementary.html">Methods</a>
+                    <a href="/2024_Edinburgh/docs/project/Workflow-project.html">Workflow and methods</a>
+                    <a href="/2024_Edinburgh/docs/project/Supplementary.html">Supplementary</a>
                 </div>
             </div>
             <a href="/2024_Edinburgh/docs/Team/teampage.html">Team</a>
@@ -113,131 +113,182 @@
             ],
         };
 
-        const SimpleLabNotebook = () => {
-            const [currentMonth, setCurrentMonth] = React.useState('July');
-            const [currentPage, setCurrentPage] = React.useState(0);
-            const [notebookContent, setNotebookContent] = React.useState(initialLabData);
+    const CoverPage = ({ onEnter }) => (
+    <div 
+        style={{
+            width: '800px',
+            maxWidth: '100%',
+            height: '1131px', // Approximately A4 aspect ratio (800 * 1.4142)
+            margin: '0 auto',
+            backgroundColor: '#191970',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'white',
+            fontFamily: 'Times New Roman, serif',
+            fontSize: '2rem',
+            textAlign: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+            position: 'relative',
+            overflow: 'hidden'
+        }}
+        onClick={onEnter}
+    >
+        <div style={{
+            position: 'absolute',
+            top: '20px',
+            left: '20px',
+            right: '20px',
+            bottom: '20px',
+            border: '2px solid rgba(255,255,255,0.3)',
+            pointerEvents: 'none'
+        }}></div>
+        <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>IDEC Edinburgh Lab Notebook</h1>
+        <p style={{ fontSize: '1.2rem', marginTop: '2rem' }}>Click to open</p>
+        <div style={{
+            position: 'absolute',
+            bottom: '40px',
+            fontSize: '1rem',
+            opacity: 0.7
+        }}>
+            2024
+        </div>
+    </div>
+);
 
-            const handleContentChange = (event) => {
-                const newContent = event.target.innerHTML;
-                setNotebookContent(prevContent => ({
-                    ...prevContent,
-                    [currentMonth]: prevContent[currentMonth].map((content, index) => 
-                        index === currentPage ? { ...content, text: newContent } : content
-                    )
-                }));
-            };
+    const SimpleLabNotebook = () => {
+        const [showCover, setShowCover] = React.useState(true);
+        const [currentMonth, setCurrentMonth] = React.useState('July');
+        const [currentPage, setCurrentPage] = React.useState(0);
+        const [notebookContent, setNotebookContent] = React.useState(initialLabData);
 
-            const nextPage = () => {
-                if (currentPage < notebookContent[currentMonth].length - 1) {
-                    setCurrentPage(currentPage + 1);
-                } else {
-                    const nextMonthIndex = months.indexOf(currentMonth) + 1;
-                    if (nextMonthIndex < months.length) {
-                        setCurrentMonth(months[nextMonthIndex]);
-                        setCurrentPage(0);
-                    }
-                }
-            };
-
-            const prevPage = () => {
-                if (currentPage > 0) {
-                    setCurrentPage(currentPage - 1);
-                } else {
-                    const prevMonthIndex = months.indexOf(currentMonth) - 1;
-                    if (prevMonthIndex >= 0) {
-                        setCurrentMonth(months[prevMonthIndex]);
-                        setCurrentPage(notebookContent[months[prevMonthIndex]].length - 1);
-                    }
-                }
-            };
-
-            return (
-                <div>
-                    <h1 style={{marginBottom: '1rem'}}>Lab Notebook</h1>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                        {months.map((month) => (
-                            <button
-                                key={month}
-                                onClick={() => { setCurrentMonth(month); setCurrentPage(0); }}
-                                style={{
-                                    padding: '0.625rem',
-                                    backgroundColor: month === currentMonth ? '#007bff' : '#f0f0f0',
-                                    color: month === currentMonth ? 'white' : 'black',
-                                    border: 'none',
-                                    borderRadius: '5px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                {month}
-                            </button>
-                        ))}
-                    </div>
-                    <div style={{
-                        border: '3px solid black',
-                        borderRadius: '5px',
-                        padding: '1.25rem',
-                        background: 'linear-gradient(to bottom, transparent 23px, #ccc 24px)',
-                        backgroundSize: '100% 24px',
-                        lineHeight: '24px',
-                        textAlign: 'left',
-                        fontFamily: 'Times New Roman, serif',
-                        fontSize: '1rem',
-                        position: 'relative',
-                        minHeight: '600px',
-                        width: '800px',
-                        maxWidth: '90%',
-                        margin: '0 auto',
-                    }}>
-                        <h2 style={{ 
-                            marginTop: '0', 
-                            marginBottom: '24px', 
-                            background: 'white', 
-                            display: 'inline-block', 
-                            padding: '0 10px', 
-                            position: 'relative', 
-                            top: '-10px', 
-                            left: '-10px' 
-                        }}>
-                            {currentMonth}
-                        </h2>
-                        <div 
-                            contentEditable
-                            dangerouslySetInnerHTML={{ __html: notebookContent[currentMonth][currentPage].text }}
-                            onInput={handleContentChange}
-                            style={{ 
-                                margin: '0', 
-                                paddingBottom: '24px',
-                                minHeight: '300px',
-                                outline: 'none',
-                                whiteSpace: 'pre-wrap',
-                                wordBreak: 'break-word',
-                                overflowWrap: 'break-word'
-                            }}
-                        />
-                        <div style={{ marginTop: '1rem' }}>
-                            {notebookContent[currentMonth][currentPage].images.map((image, index) => (
-                                <img key={index} src={image} alt={`Lab image ${index + 1}`} style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }} />
-                            ))}
-                        </div>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.25rem' }}>
-                        <button onClick={prevPage} disabled={currentMonth === 'July' && currentPage === 0}
-                            style={{ padding: '0.625rem', backgroundColor: '#f0f0f0', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                            Previous Page
-                        </button>
-                        <span>Page {currentPage + 1}/{notebookContent[currentMonth].length}</span>
-                        <button onClick={nextPage} disabled={currentMonth === 'September' && currentPage === notebookContent['September'].length - 1}
-                            style={{ padding: '0.625rem', backgroundColor: '#f0f0f0', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                            Next Page
-                        </button>
-                    </div>
-                </div>
-            );
+        const handleContentChange = (event) => {
+            const newContent = event.target.innerHTML;
+            setNotebookContent(prevContent => ({
+                ...prevContent,
+                [currentMonth]: prevContent[currentMonth].map((content, index) => 
+                    index === currentPage ? { ...content, text: newContent } : content
+                )
+            }));
         };
 
-        ReactDOM.render(<SimpleLabNotebook />, document.getElementById('root'));
-    </script>
+        const nextPage = () => {
+            if (currentPage < notebookContent[currentMonth].length - 1) {
+                setCurrentPage(currentPage + 1);
+            } else {
+                const nextMonthIndex = months.indexOf(currentMonth) + 1;
+                if (nextMonthIndex < months.length) {
+                    setCurrentMonth(months[nextMonthIndex]);
+                    setCurrentPage(0);
+                }
+            }
+        };
+
+        const prevPage = () => {
+            if (currentPage > 0) {
+                setCurrentPage(currentPage - 1);
+            } else {
+                const prevMonthIndex = months.indexOf(currentMonth) - 1;
+                if (prevMonthIndex >= 0) {
+                    setCurrentMonth(months[prevMonthIndex]);
+                    setCurrentPage(notebookContent[months[prevMonthIndex]].length - 1);
+                }
+            }
+        };
+
+        if (showCover) {
+            return <CoverPage onEnter={() => setShowCover(false)} />;
+        }
+
+        return (
+            <div>
+                <h1 style={{marginBottom: '1rem'}}>Lab Notebook</h1>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                    {months.map((month) => (
+                        <button
+                            key={month}
+                            onClick={() => { setCurrentMonth(month); setCurrentPage(0); }}
+                            style={{
+                                padding: '0.625rem',
+                                backgroundColor: month === currentMonth ? '#007bff' : '#f0f0f0',
+                                color: month === currentMonth ? 'white' : 'black',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            {month}
+                        </button>
+                    ))}
+                </div>
+                <div style={{
+                    border: '5px solid black',
+                    borderRadius: '5px',
+                    padding: '1.25rem',
+                    background: 'linear-gradient(to bottom, transparent 23px, #191970 24px)',
+                    backgroundSize: '100% 24px',
+                    lineHeight: '24px',
+                    textAlign: 'left',
+                    fontFamily: 'Times New Roman, serif',
+                    fontSize: '1rem',
+                    position: 'relative',
+                    minHeight: '600px',
+                    width: '800px',
+                    maxWidth: '90%',
+                    margin: '0 auto',
+                }}>
+                    <h2 style={{ 
+                        marginTop: '0', 
+                        marginBottom: '24px', 
+                        background: 'white', 
+                        display: 'inline-block', 
+                        padding: '0 10px', 
+                        position: 'relative', 
+                        top: '-10px', 
+                        left: '-10px' 
+                    }}>
+                        {currentMonth}
+                    </h2>
+                    <div 
+                        contentEditable
+                        dangerouslySetInnerHTML={{ __html: notebookContent[currentMonth][currentPage].text }}
+                        onInput={handleContentChange}
+                        style={{ 
+                            margin: '0', 
+                            paddingBottom: '24px',
+                            minHeight: '300px',
+                            outline: 'none',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                            overflowWrap: 'break-word',
+
+                        }}
+                    />
+                    <div style={{ marginTop: '1rem' }}>
+                        {notebookContent[currentMonth][currentPage].images.map((image, index) => (
+                            <img key={index} src={image} alt={`Lab image ${index + 1}`} style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }} />
+                        ))}
+                    </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.25rem' }}>
+                    <button onClick={prevPage} disabled={currentMonth === 'July' && currentPage === 0}
+                        style={{  padding: '0.625rem', backgroundColor: '#ccc', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                        Previous Page
+                    </button>
+                    <span>Page {currentPage + 1}/{notebookContent[currentMonth].length}</span>
+                    <button onClick={nextPage} disabled={currentMonth === 'September' && currentPage === notebookContent['September'].length - 1}
+                        style={{ padding: '0.625rem', backgroundColor: '#ccc', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                        Next Page
+                    </button>
+                </div>
+            </div>
+        );
+    };
+
+    ReactDOM.render(<SimpleLabNotebook />, document.getElementById('root'));
+</script>
         <footer class="end-section">
         <div class="location-container">
             <h2 class="map-header">Our Location</h2>
