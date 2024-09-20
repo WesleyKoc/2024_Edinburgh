@@ -4,7 +4,7 @@
     <title>Project Workflow</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-    <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         /* Base styles */
 body, html {
@@ -183,6 +183,31 @@ body, html {
         font-size: 12px;
     }
 }
+.sworkflow {
+    text-align: center;
+    margin: 40px 0;
+    background-color: ghostwhite;
+    width: 100%;
+        }
+
+#staticworkflowheader {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sworkflow a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #00a8ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sworkflow a:hover {
+    background-color: #0077ff;
+}
     </style>
 </head>
 <body>
@@ -195,8 +220,8 @@ body, html {
                 <div class="dropdown-content">
                     <a href="/2024_Edinburgh/docs/project/Description-project.html">Description</a>
                     <a href="/2024_Edinburgh/docs/project/Results-project.html">Results</a>
-                    <a href="/2024_Edinburgh/docs/project/Workflow-project.html">Workflow</a>
-                    <a href="/2024_Edinburgh/docs/project/Supplementary.html">Methods</a>
+                    <a href="/2024_Edinburgh/docs/project/Workflow-project.html">Workflow and methods</a>
+                    <a href="/2024_Edinburgh/docs/project/Supplementary.html">Supplementary</a>
                 </div>
             </div>
             <a href="/2024_Edinburgh/docs/Team/teampage.html">Team</a>
@@ -295,6 +320,14 @@ body, html {
                 <g id="node2" class="node-group">
                     <circle cx="700" cy="300" r="60" class="node" />
                     <text x="700" y="300" dy=".3em" class="node-text">Starting materials</text>
+                </g>
+                <g id="node2.5" class="node-group">
+                    <circle cx="100" cy="350" r="100" class="node subnode" />
+                    <text x="100" y="350" dy=".4em" class="node-text">Error-prone PCR</text>
+                </g>
+                 <g id="node2.75" class="node-group">
+                    <circle cx="1300" cy="350" r="100" class="node" />
+                    <text x="1300" y="350" dy=".4em" class="node-text">Site-Directed Mutagensis</text>
                 </g>
                 <g id="node3" class="node-group">
                     <circle cx="700" cy="500" r="60" class="node" />
@@ -469,6 +502,10 @@ body, html {
             <h2 id="popup-title"></h2>
             <div id="popup-content" class="popup-content"></div>
         </div>
+        <div id="staticworkflow" class="sworkflow">
+    <h3 id="staticworkflowheader">Static Workflow</h3>
+    <a href="staticworkflow.jpg" target="_blank">View Static Workflow Image</a>
+</div>
 
         <footer class="end-section">
             <div class="location-container">
