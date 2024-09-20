@@ -1,215 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Project Workflow</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>IDEC Wiki</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
     <style>
-        /* Base styles */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-
-/* Updated navbar styles */
-.navbar {
-    z-index: 2000;
+        #root {
+            width: 90%;
+            max-width: 50rem;
+            margin: 1.25rem auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-
-/* Intro container styles */
-.intro-container {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: ghostwhite;
-    overflow: hidden;
-    transition: opacity 0.3s ease-in-out;
-    z-index: 1000;
-    padding-top: 60px;
-}
-
-.intro-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.intro-node {
-    fill: #00a8ff;
-    stroke: #fff;
-    stroke-width: 2;
-    filter: url(#glow);
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.5s ease-out;
-}
-
-.intro-connection {
-    stroke: #00a8ff;
-    stroke-width: 1;
-    filter: url(#glow);
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    transition: stroke-dashoffset 2s ease-out;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-}
-
-.intro-node, .intro-connection {
-    animation: pulse 3s infinite;
-}
-
-.intro-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-    color: black;
-    opacity: 0;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-}
-
-/* Main content styles */
-.main-content {
-    position: relative;
-    z-index: 1;
-    background-color: ghostwhite;
-    min-height: 100vh;
-    padding-top: 100vh; /* To offset for the intro container */
-}
-
-/* Workflow container styles */
-.workflow-container {
-    width: 100%;
-    min-height: 1500px;
-    background-color: ghostwhite;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.workflow-svg {
-    width: 100%;
-    height: auto;
-}
-
-/* Node styles */
-.node {
-    fill: #00a8ff;
-    stroke: #000;
-    stroke-width: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease-out;
-}
-
-.node:hover {
-    fill: #0077ff;
-}
-
-.node-text {
-    fill: white;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    text-anchor: middle;
-    pointer-events: none;
-}
-
-/* Connection styles */
-.node-group {
-    opacity: 0;
-    transform: scale(0);
-    transition: opacity 0.5s, transform 0.5s;
-}
-
-.connection {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    transition: stroke-dashoffset 1s ease-in-out;
-     stroke: black;
-    stroke-width: 2;
-    fill: none;
-}
-
-/* Popup styles */
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    z-index: 1001;
-    max-width: 80%;
-    max-height: 80%;
-    overflow-y: auto;
-}
-
-.popup h2 {
-    margin-top: 0;
-    color: #333;
-}
-
-.popup-content {
-    color: #666;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #999;
-}
-/* Additional styles for responsiveness */
-@media (max-width: 768px) {
-    .intro-title {
-        font-size: 3rem;
-    }
-
-    .node-text {
-        font-size: 12px;
-    }
-}
-.sworkflow {
-    text-align: center;
-    margin: 40px 0;
-    background-color: ghostwhite;
-    width: 100%;
+        @media (max-width: 768px) {
+            #root {
+                width: 95%;
+                padding: 0.938rem;
+            }
         }
-
-#staticworkflowheader {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.sworkflow a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #00a8ff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.sworkflow a:hover {
-    background-color: #0077ff;
-}
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo-placeholder">LOGO</div>
@@ -229,460 +46,261 @@ body, html {
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
+    <div id="root"></div>
+    <script type="text/babel">
+        const months = ['July', 'August', 'September'];
 
-    <div class="intro-container" id="introContainer">
-        <svg id="intro-svg" viewBox="0 0 1000 600" class="intro-svg">
-            <defs>
-                <filter id="glow">
-                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </defs>
-            <!-- Intro SVG content will be dynamically added here -->
-        </svg>
-        <h1 class="intro-title">Our Workflow</h1>
+        const initialLabData = {
+             July: [
+    {
+        text: "Week 1: Started experiment A<br><br>Notes:<br>- Prepared lab equipment<br>- Initiated cell cultures",
+        images: []
+    },
+    {
+        text: "Week 2: <br>Collected initial data<br><br>Results:<br>- Growth rate: 0.5 μm/hour<br>- Viability: 95%<br><br>Prepared stock solutions used for making competent cells:<br>- 0.1M MgCl<sub>2</sub> and CaCl<sub>2</sub>/glycerol solution (1.7mL 0.1M CaCl<sub>2</sub>, 0.3mL 100% glycerol)<br><br>Prepared competent cells as according to protocol",
+        images: []
+    },
+    {
+        text: "Week 3: <br>Ordered first set of primer for the Ag43 cleavage site library and error-prone PCR<br><br>Biofilm protocol test with all three strains (induced/non-induced) with 96 and 24 well plates<br>- This failed, and we realised after incubating cells with M63 alone that our M63 media was not working<br>- Remade M63 media correctly, and this time filter sterilised all components before mixing<br><br>Made extract and buffer for Seamless Ligation Cloning Extract (SLiCE) cloning method<br><br>Miniprep the two plasmids and performed digestion for verification<br><br>Amplified gene and vector for Ag43 and CsgA through PCR<br>- Attempt 1 results: Both genes worked but no CsgA vector product and secondary bands found in Ag43 vector<br>- Attempt 2 results: Tried using primer Ag43_V at higher annealing temperatures and just CsgA_V again. Ag43_V at 70ºc worked well but CsgA had secondary bands - this is because our two primers for this had a higher T<sub>m</sub> difference than 5ºc so primers reordered<br><br>Tested SLiCE extract + buffer by transforming Top10 cells then miniprep<br>- Failed<br><br>Started discussing error-prone PCR protocol",
+        images: []
+    },
+    {
+        text: "Week 4: <br>Remade competent cells as previous batch were not competent<br>Redid Ag43 amplification to get a higher concentration. Redid with a higher extension time<br>Performed Gibson and SLiCE on both genes: Gibson worked for both genes while SLiCE worked CsgA but not Ag43<br><br><strong> Testing <a href=\"https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/0471142727.mb0803s51\">epPCR protocol</a> for Ag43</strong><br><br>PCR mixture prepared according to protocol<br>Results: no visible bands produced by Ag43 primers, CsgA primers produced were extremely faint at the correct band size that smeared with primers at the bottom of the gel<br><br>Total epPCR mixture volumes for protocol troubleshooting reduced from 100µL to 25µL<br><br>Controls to test:<br>- Taq polymerase: Run standard PCR using Taq polymerase to test for Taq polymerase stability<br>- Lower temperatures: Reducing annealing temperatures down to 55ºc by intervals of 2ºc from 67ºc<br>- MnCl<sub>2</sub> addition times: Adding at the same time as other components against adding immediately before thermocycling begins<br>- Primers: Running standard PCR using confirmed fully functional Q5 polymerase<br>- Template DNA concentration: Reducing plasmid concentration in mixture<br><br>Results for controls:<br>- Taq polymerase: Taq polymerase fully functional under manufacturer's instructions<br>- Lower temperatures: epPCR under annealing temperatures of 65ºc, 63ºc, 61ºc, 59ºc, 57ºc, 55ºc did not produce any visible bands for Ag43<br>- MnCl<sub>2</sub> addition times: No bands produced regardless of addition time<br>- Primers: Standard PCR with Q5 produced clear distinct bands at correct gene product sizes<br>- Template DNA concentration: Plasmid concentration on protocol worked on other standard PCR protocols, produced clear distinct bands when products are run on gels",
+        images: []
+    }
+],            
+
+             
+            August: [
+                {
+                    text: "Week 1:<br><br>Confirmed cloning of CsgA SLiCE and both Gibson were correct using colony PCR<br><br>Started Asymmetric PCR to make megaprimers for the Ag43 cleavage site<br>- Asymmetric PCR attempt 1 with Q5: No products generated<br>- Attempt 2 with Q5 and low fidelity Taq polymerase: Q5 failed, Taq worked<br>   - Purified Taq megaprimers but little product recovered as wrong kit was used<br>- Attempt 3 with Taq: Multiple bands produced thus performed gel extraction but were lost again due to wrong kit being used<br>- Attempt 4 with GeneOrator and Dr. Sadler's protocol with Q5 as we concluded high fidelity is crucial: failed<br><br>Re-plated the 6 control plates:<br>- E. coli:MG1655<br>- E. coli:MG1655 pBAD-Curli<br>- E. coli:MG1655 pBAD-Ag43<br>- E. coli:MG1655 ΔCsgA ΔAg43<br>- E. coli:MG1655 ΔCsgA ΔAg43 pBAD-Curli<br>- E. coli:MG1655 ΔCsgA ΔAg43 pBAD-Ag43<br><br><strong>Continued finalising epPCR protocol details for Ag43</strong><br><br>MgCl<sub>2</sub> final concentrations:<br>- 5mM<br>- 3mM<br>- 1mM<br><br>MnCl<sub>2</sub> final concentrations:<br>- 0.25mM<br>- 0.1mM<br>- 0.075mM<br>- 0.05mM<br>- 0.025mM<br>- 0.01mM<br><br>Results from gel electrophoresis of epPCR products:<br>- All concentrations for MgCl<sub>2</sub> produced distinct bands at 1.5kb range with no smearing<br>- No bands produced for MnCl<sub>2</sub> at 0.25mM<br>- Very faint band at 1.5kb range with no smears produced by 0.1mM MnCl<sub>2</sub><br>- MnCl<sub>2</sub> at concentrations 0.075mM, 0.05mM, 0.025mM, and 0.01mM produced distinct bands with no smearing",
+                    images: []
+                },
+                {
+                    text: "Week 2:<br><br>Started using Phusion polymerase as per Dr. Sadler's recommendation, completed a symmetric control under different temperatures (56, 58, 60, 62, 64) and with/without DMSO<br><br>Ran Inverse PCR for Ag43 cleavage sites at different temperatures<br><br>Also decided to look into doing megaprimers with different ratios of forward to reverse primer, normal ratio with more cycles up to 65, and also trying asymmetric PCR with the symmetric control products only using reverse primer<br>- Inverse and asymmetric with symmetric template didn't work<br>- Different ratios seemed like it could have worked<br>- Our supervisor advised with the possiblity of asymmetric PCR not working due to the size of megaprimers thus decided to order primers for CsgA instead as the gene was smaller<br><br><strong>Final epPCR protocol testing for CsgA</strong><br><br>MgCl<sub>2</sub> final concentration: 5mM<br>MnCl<sub>2</sub> final concentration: 0.075mM<br><br>Results from gel electrophoresis of epPCR products:<br>- Distinct but smeared band produced for MgCl<sub>2</sub> only epPCR reaction<br>- Distinct and unsmeared bands produced for MnCl<sub>2</sub> only epPCR reaction and reaction with both MnCl<sub>2</sub> and MgCl<sub>2</sub><br>- All bands were at the correct band size of approximately 500bp<br><br>epPCR succeeded for both Ag43 and CsgA, but due to time constraints we have decided to focus on using epPCR only on CsgA<br>Sent samples of epPCR products for CsgA to Edinburgh Genome Foundry to be passed to Dundee Sequencing and Services to be sequenced using Sanger method, to detect presence of any mutations and possibly determine this method's mutation rate",
+                    images: []
+                },
+                {
+                    text: "Week 3:<br><br>Conducted interviews for human practices<br><br>Reran all the PCRs from week 2 but nothing worked so idea of using different ratios was abandoned<br><br>Redid asymmetric PCR with Phusion and Q5 under the exact conditions from the Fast and Flexible protocol as a last attempt<br>- This didn't work<br><br>Made a batch of competent double-knockout cells<br><br>Retried asymmetric PCR with CsgA which worked this time using Q5 under 60ºc<br>- Tried symmetric full-length with this according to protocol but failed<br>- Dr. Sadler advised not to dilute down megaprimer products, but put everything into the symmetric PCR reaction<br>Confirmed the idea that Ag43 PCRs didn't work because the gene was too long, shifted focus to only creating cleavage site libraries<br>   - Use SDM and ep-PCR for CsgA<br><br>Met with the Edinburgh Genome Foundry who agreed to perform our biofilm assay for us and Sanger Sequencing for our epPCR library",
+                  images: []
+                },
+                {
+                    text: "Week 4: <br><br>Redid full-length symmetric PCR with CsgA under Dr. Sadler's advice and worked<br>- Gel extracted product<br>- Used the product for Gibson and SLiCE but neither worked due to incorrect calculations for Gibson while SLiCE simply failed<br>- Repeated Gibson: only 8 colonies of which we transformed into double knockout strain worked<br>- Due to low efficiency of transformation, repeated Gibson and transformation of CsgA with commercial cells, and no colonies produced (as we thought our cells weren't competent enough<br>- Tested the strength of ampicillin (0, 50, 100 ng/mL) for transformation with Curli plasmid on our top 10 cells and commercial top 10 cells and left on the bench over the weekend → only got a gew colonies for each plate → allowed to grow at 37ºc overnight → got many colonies<br>- Tested the length of the heat shock (30s, 40s, 50s) and the amount of cells (100µL, 200µL) → all got many colonies<br><br><strong>Continued testing for inverse PCR protocol</strong><br><br>Conditions tested:<br>- Temperature<br>- DMSO added or not<br><br>Temperatures tested:<br>- 70ºc<br>- 72ºc<br>- 74ºc<br>- 64ºc<br>- 66ºc<br>- 68ºc<br><br>Results from gel electrophoresis of inverse PCR products:<br>- Without adding DMSO at temperatures 70ºc to 74ºc: Only bands produced are at the bottom of the gel, likely primers, therefore inverse PCR failed<br>- Without adding DMSO at temperatures 68ºc: Smears with no distinct bands produced, therefore control failed<br>- DMSO added for all temperatures: produced large smears that span nearly the entire length of the ladder, therefore inverse PCR failed<br><br>Inverse PCR protocol conclusion: all tests at different temperatures within the appropriate range failed, therefore these primers will be abandoned in favour of new primers",
+                
+                  images: []
+                },
+            ],
+            September: [
+                {
+                    text: "Week 1:<br><br>Ag43:<br>- Picked around 60 colonies from Top10 culture and minipreped all together for D551 → transformed into oduble knockout → no colonies formed<br>- Attempt 1 for P552 QuickChange protocol: no bands<br>- Attempt 2 for P552 QuickChange protocol: no bands<br><br>CsgA:<br>- Ran gel for full length of primers 2 and 3 with DMSO added at asymmetric PCR: failed, very faint bands at 500bp<br>- Asymmetric PCR for primers 0, 2, 3, 4, 5, 6 again: success, single band around 300bp<br>- Full-length PCR with 3% DMSO: primary band at 500bp<br>- PCR purified then digested with Dpn1, then Gibson ligated into plasmid and transformed into Top10 cells: 1/4 spread on plate, 3/4 placed in liquid culture<br>   - Only a few colonies on the plate<br>   - Grew in liquid culture for mutants 3, 4, 5, 6<br>   - Nothing grew in liquid culture for mutants 0, 2<br>- Miniprepped and transformed mutant plasmids 3, 4, 5, 6 into double knockouts → about 30 colonies formed on each plate<br>- Redid Gibson ligation for mutant genes 0, 2, and transformed into Top10 cells → only mutant 2 showed growth<br><br>Error-prone PCR on CsgA:<br>- Ran CsgA error-prone PCR products on gel after Dpn1 digest: No bands formed<br>After much deliberation, we have decided to temporarily halt experiments on error-prone PCR",
+                    images: []
+                },
+                {
+                    text: "",
+                
+                  images: []
+                },
+                {
+                    text: "",
+                
+                  images: []
+                },
+                {
+                    text: "",
+                
+                  images: []
+                },
+            ],
+        };
+
+    const CoverPage = ({ onEnter }) => (
+    <div 
+        style={{
+            width: '800px',
+            maxWidth: '100%',
+            height: '1131px', // Approximately A4 aspect ratio (800 * 1.4142)
+            margin: '0 auto',
+            backgroundColor: '#191970',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'white',
+            fontFamily: 'Times New Roman, serif',
+            fontSize: '2rem',
+            textAlign: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+            position: 'relative',
+            overflow: 'hidden'
+        }}
+        onClick={onEnter}
+    >
+        <div style={{
+            position: 'absolute',
+            top: '20px',
+            left: '20px',
+            right: '20px',
+            bottom: '20px',
+            border: '2px solid rgba(255,255,255,0.3)',
+            pointerEvents: 'none'
+        }}></div>
+        <h1 style={{ fontSize: '3rem', marginBottom: '40rem' }}>IDEC Edinburgh Lab Notebook</h1>
+        <p style={{ fontSize: '1.2rem', marginTop: '5rem' }}>Click to open</p>
+        <div style={{
+            position: 'absolute',
+            bottom: '40px',
+            fontSize: '1rem',
+            opacity: 0.7
+        }}>
+            2024
+        </div>
     </div>
+);
 
-    <div class="main-content">
-        <div class="workflow-container">
-            <svg id="workflow-svg" viewBox="-150 0 1700 2200" class="workflow-svg">
-                <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                    refX="0" refY="3.5" orient="auto">
-                      <polygon points="0 0, 10 3.5, 0 7" fill="#000000" />
-                    </marker>
-                </defs>
-                <g class="connections">
-                        <!-- Main Connections -->
-                <path d="M700 100 L700 300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 300 L700 500" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 500 L900 600" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 500 L900 750" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 500 L900 900" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 1200 L600 1300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 1200 L800 1300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 1200 L600 1300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 1200 L800 1300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M600 1300 L450 1300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M800 1300 L950 1300" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M450 1300 L450 1450" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M950 1300 L950 1450" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M450 1450 L600 1450" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M600 1450 L600 1600" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M450 1600 L600 1600" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M450 1600 L450 1750" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M450 1750 L600 1750" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M600 1750 L600 1900" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M600 1900 L600 2050" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M800 1450 L950 1450" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M800 1450 L800 1600" class="connection" marker-end="url(#arrowhead)" />
-                <!-- Left side connections -->
-                <path d="M700 500 L500 600" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M700 500 L500 750" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M500 600 L300 500" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M500 600 L300 700" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M500 750 L300 800" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M500 750 L300 900" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M300 700 L100 700" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M100 700 L0 600" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M100 700 L0 800" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M0 800 L0 900" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M300 900 L0 900" class="connection" marker-end="url(#arrowhead)" />
-                
-                <!-- Right Sub-connections -->
-                <path d="M900 600 L1100 500" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M900 600 L1100 700" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M900 750 L1100 800" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M900 750 L1100 900" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M900 900 L1100 1000" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M900 900 L1100 1100" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M1100 700 L1300 750" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M1100 800 L1300 750" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M1300 750 L1500 675" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M1300 750 L1500 825" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M1100 1100 L1500 1100" class="connection" marker-end="url(#arrowhead)" />
-                <path d="M1500 825 L1500 1100" class="connection" marker-end="url(#arrowhead)" />
-                
-                <!-- Connection from Step 23 to Step 28 -->
-                <path d="M1500 1100 L700 1200" class="connection" marker-end="url(#arrowhead)" />
-                
-                <!-- Connection from Step 27 to Step 28 -->
-                <path d="M0 900 L700 1200" class="connection" marker-end="url(#arrowhead)" />
-                </g>
-                <g class="nodes">
-                     <g id="node1" class="node-group">
-                    <circle cx="700" cy="100" r="60" class="node" />
-                    <text x="700" y="100" dy=".3em" class="node-text">Our Workflow</text>
-                </g>
-                <g id="node2" class="node-group">
-                    <circle cx="700" cy="300" r="60" class="node" />
-                    <text x="700" y="300" dy=".3em" class="node-text">Starting materials</text>
-                </g>
-                <g id="node2.5" class="node-group">
-                    <circle cx="100" cy="350" r="100" class="node subnode" />
-                    <text x="100" y="350" dy=".4em" class="node-text">Error-prone PCR</text>
-                </g>
-                 <g id="node2.75" class="node-group">
-                    <circle cx="1300" cy="350" r="100" class="node" />
-                    <text x="1300" y="350" dy=".4em" class="node-text">Site-Directed Mutagensis</text>
-                </g>
-                <g id="node3" class="node-group">
-                    <circle cx="700" cy="500" r="60" class="node" />
-                    <text x="700" y="500" dy=".3em" class="node-text">Miniprep</text>
-                </g>
-                <g id="node4" class="node-group">
-                    <circle cx="900" cy="600" r="60" class="node" />
-                    <text x="900" y="600" dy=".3em" class="node-text">Asymmeteric PCR</text>
-                </g>
-                <g id="node5" class="node-group">
-                    <circle cx="900" cy="750" r="60" class="node" />
-                    <text x="900" y="750" dy=".3em" class="node-text">Amplify Gene</text>
-                </g>
-                <g id="node6" class="node-group">
-                    <circle cx="900" cy="900" r="60" class="node" />
-                    <text x="900" y="900" dy=".3em" class="node-text">Amplify Backbone</text>
-                </g>
-                <g id="node8" class="node-group">
-                    <circle cx="500" cy="600" r="60" class="node" />
-                    <text x="500" y="600" dy=".3em" class="node-text">Amplify CsgA gene</text>
-                </g>
-                <g id="node9" class="node-group">
-                    <circle cx="500" cy="750" r="60" class="node" />
-                    <text x="500" y="750" dy=".3em" class="node-text">Amplify Backbone</text>
-                </g>
-                
-                <!-- Right Sub-nodes -->
-                <g id="node10" class="node-group">
-                    <circle cx="1100" cy="500" r="50" class="node subnode" />
-                    <text x="1100" y="500" dy=".3em" class="node-text">Verify Size</text>
-                </g>
-                <g id="node11" class="node-group">
-                    <circle cx="1100" cy="700" r="50" class="node subnode" />
-                    <text x="1100" y="700" dy=".3em" class="node-text">Purify</text>
-                </g>
-                <g id="node12" class="node-group">
-                    <circle cx="1100" cy="800" r= "50" class="node subnode" />
-                    <text x="1100" y="800" dy=".3em" class="node-text">Verify Size</text>
-                </g>
-                <g id="node13" class="node-group">
-                    <circle cx="1100" cy="900" r="50" class="node subnode" />
-                    <text x="1100" y="900" dy=".3em" class="node-text">Purify</text>
-                </g>
-                <g id="node14" class="node-group">
-                    <circle cx="1100" cy="1000" r="50" class="node subnode" />
-                    <text x="1100" y="1000" dy=".3em" class="node-text">Verify size</text>
-                </g>
-                <g id="node15" class="node-group">
-                    <circle cx="1100" cy="1100" r="50" class="node subnode" />
-                    <text x="1100" y="1100" dy=".3em" class="node-text">Purify</text>
-                </g>
-                
-                <!-- Left Sub-nodes -->
-                <g id="node16" class="node-group">
-                    <circle cx="300" cy="500" r="50" class="node subnode" />
-                    <text x="300" y="500" dy=".3em" class="node-text">Verify size</text>
-                </g>
-                <g id="node17" class="node-group">
-                    <circle cx="300" cy="700" r="50" class="node subnode" />
-                    <text x="300" y="700" dy=".3em" class="node-text">Purify</text>
-                </g>
-                <g id="node18" class="node-group">
-                    <circle cx="300" cy="800" r="50" class="node subnode" />
-                    <text x="300" y="800" dy=".3em" class="node-text">Purify</text>
-                </g>
-                <g id="node19" class="node-group">
-                    <circle cx="300" cy="900" r="50" class="node subnode" />
-                    <text x="300" y="900" dy=".3em" class="node-text">Verify Size</text>
-                </g>
-                <g id="node20" class="node-group">
-                    <circle cx="1300" cy="750" r="60" class="node subsubnode" />
-                    <text x="1300" y="750" dy=".3em" class="node-text">Step 20</text>
-                </g>
-                <g id="node21" class="node-group">
-                    <circle cx="1500" cy="675" r="50" class="node subsubnode" />
-                    <text x="1500" y="675" dy=".3em" class="node-text">Step 21</text>
-                </g>
-                <g id="node22" class="node-group">
-                    <circle cx="1500" cy="825" r="50" class="node subsubnode" />
-                    <text x="1500" y="825" dy=".3em" class="node-text">Step 22</text>
-                </g>
-                <g id="node23" class="node-group">
-                    <circle cx="1500" cy="1100" r="50" class="node subsubnode" />
-                    <text x="1500" y="1100" dy=".3em" class="node-text">Step 23</text>
-                </g>
-                <g id="node24" class="node-group">
-                    <circle cx="100" cy="700" r="60" class="node subnode" />
-                    <text x="100" y="700" dy=".3em" class="node-text">EP-PCR for CsgA</text>
-                </g>
-                <g id="node25" class="node-group">
-                    <circle cx="0" cy="600" r="50" class="node subsubnode" />
-                    <text x="0" y="600" dy=".3em" class="node-text">Verify Size</text>
-                </g>
-                <g id="node26" class="node-group">
-                    <circle cx="0" cy="800" r="40" class="node subsubnode" />
-                    <text x="0" y="800" dy=".3em" class="node-text">Purify</text>
-                </g>
-                <g id="node27" class="node-group">
-                    <circle cx="0" cy="900" r="50" class="node subsubnode" />
-                    <text x="0" y="900" dy=".3em" class="node-text">Cloning</text>
-                </g>
-                <g id="node28" class="node-group">
-                    <circle cx="700" cy="1200" r="60" class="node" />
-                    <text x="700" y="1200" dy=".3em" class="node-text">Step 28</text>
-                </g>
-                <g id="node29" class="node-group">
-                    <circle cx="600" cy="1300" r="60" class="node" />
-                    <text x="600" y="1300" dy=".3em" class="node-text">Step 29</text>
-                </g>
-                <g id="node30" class="node-group">
-                    <circle cx="800" cy="1300" r="60" class="node" />
-                    <text x="800" y="1300" dy=".3em" class="node-text">Step 30</text>
-                </g>
-                <g id="node31" class="node-group">
-                    <circle cx="450" cy="1300" r="60" class="node" />
-                    <text x="450" y="1300" dy=".3em" class="node-text">Step 31</text>
-                </g>
-                <g id="node32" class="node-group">
-                    <circle cx="950" cy="1300" r="60" class="node" />
-                    <text x="950" y="1300" dy=".3em" class="node-text">Step 32</text>
-                </g>
-                <g id="node33" class="node-group">
-                    <circle cx="450" cy="1450" r="60" class="node" />
-                    <text x="450" y="1450" dy=".3em" class="node-text">Step 33</text>
-                </g>
-                <g id="node34" class="node-group">
-                    <circle cx="950" cy="1450" r="60" class="node" />
-                    <text x="950" y="1450" dy=".3em" class="node-text">Step 34</text>
-                </g>
-                 <g id="node35" class="node-group">
-                    <circle cx="600" cy="1450" r="60" class="node" />
-                    <text x="600" y="1450" dy=".3em" class="node-text">Step 35</text>
-                </g>
-                <g id="node36" class="node-group">
-                    <circle cx="600" cy="1600" r="60" class="node" />
-                    <text x="600" y="1600" dy=".3em" class="node-text">Step 36</text>
-                </g>
-                <g id="node37" class="node-group">
-                    <circle cx="450" cy="1600" r="60" class="node" />
-                    <text x="450" y="1600" dy=".3em" class="node-text">Step 37</text>
-                </g>
-                <g id="node38" class="node-group">
-                    <circle cx="450" cy="1750" r="60" class="node" />
-                    <text x="450" y="1750" dy=".3em" class="node-text">Step 38</text>
-                </g>
-                <g id="node39" class="node-group">
-                    <circle cx="600" cy="1750" r="60" class="node" />
-                    <text x="600" y="1750" dy=".3em" class="node-text">Step 39</text>
-                </g>
-                <g id="node40" class="node-group">
-                    <circle cx="600" cy="1900" r="60" class="node" />
-                    <text x="600" y="1900" dy=".3em" class="node-text">Step 40</text>
-                </g>
-                <g id="node41" class="node-group">
-                    <circle cx="600" cy="2050" r="60" class="node" />
-                    <text x="600" y="2050" dy=".3em" class="node-text">Step 41</text>
-                </g>
-                <g id="node42" class="node-group">
-                    <circle cx="800" cy="1450" r="60" class="node" />
-                    <text x="800" y="1450" dy=".3em" class="node-text">Step 42</text>
-                </g>
-                <g id="node43" class="node-group">
-                    <circle cx="800" cy="1600" r="60" class="node" />
-                    <text x="800" y="1600" dy=".3em" class="node-text">Step 43</text>
-                </g>
-                </g>
-            </svg>
-        </div>
+    const SimpleLabNotebook = () => {
+        const [showCover, setShowCover] = React.useState(true);
+        const [currentMonth, setCurrentMonth] = React.useState('July');
+        const [currentPage, setCurrentPage] = React.useState(0);
+        const [notebookContent, setNotebookContent] = React.useState(initialLabData);
 
-        <div id="popup" class="popup">
-            <span class="close-btn">&times;</span>
-            <h2 id="popup-title"></h2>
-            <div id="popup-content" class="popup-content"></div>
-        </div>
-        <div id="staticworkflow" class="sworkflow">
-    <h3 id="staticworkflowheader">Static Workflow</h3>
-    <a href="/2024_Edinburgh/docs/img/staticworkflow.jpg" target="_blank">View Static Workflow Image</a>
-</div>
+        const handleContentChange = (event) => {
+            const newContent = event.target.innerHTML;
+            setNotebookContent(prevContent => ({
+                ...prevContent,
+                [currentMonth]: prevContent[currentMonth].map((content, index) => 
+                    index === currentPage ? { ...content, text: newContent } : content
+                )
+            }));
+        };
 
-        <footer class="end-section">
-            <div class="location-container">
-                <h2 class="map-header">Our Location</h2>
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.3080769841813!2d-3.177915484069889!3d55.92155432744188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7619777d9b7%3A0xfc241ebbe5c7a678!2sPeter%20Wilson%20Building%2C%20W%20Mains%20Rd%2C%20Edinburgh%20EH9%203JG%2C%20UK!5e0!3m2!1sen!2sus!4v1692648542208!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        const nextPage = () => {
+            if (currentPage < notebookContent[currentMonth].length - 1) {
+                setCurrentPage(currentPage + 1);
+            } else {
+                const nextMonthIndex = months.indexOf(currentMonth) + 1;
+                if (nextMonthIndex < months.length) {
+                    setCurrentMonth(months[nextMonthIndex]);
+                    setCurrentPage(0);
+                }
+            }
+        };
+
+        const prevPage = () => {
+            if (currentPage > 0) {
+                setCurrentPage(currentPage - 1);
+            } else {
+                const prevMonthIndex = months.indexOf(currentMonth) - 1;
+                if (prevMonthIndex >= 0) {
+                    setCurrentMonth(months[prevMonthIndex]);
+                    setCurrentPage(notebookContent[months[prevMonthIndex]].length - 1);
+                }
+            }
+        };
+
+        if (showCover) {
+            return <CoverPage onEnter={() => setShowCover(false)} />;
+        }
+
+        return (
+            <div>
+                <h1 style={{marginBottom: '1rem'}}>Lab Notebook</h1>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                    {months.map((month) => (
+                        <button
+                            key={month}
+                            onClick={() => { setCurrentMonth(month); setCurrentPage(0); }}
+                            style={{
+                                padding: '0.625rem',
+                                backgroundColor: month === currentMonth ? '#007bff' : '#f0f0f0',
+                                color: month === currentMonth ? 'white' : 'black',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            {month}
+                        </button>
+                    ))}
+                </div>
+                <div style={{
+                    border: '3px solid black',
+                    borderRadius: '5px',
+                    padding: '1.25rem',
+                    background: 'linear-gradient(to bottom, transparent 23px, #191970 24px)',
+                    backgroundSize: '100% 24px',
+                    lineHeight: '24px',
+                    textAlign: 'left',
+                    fontFamily: 'Times New Roman, serif',
+                    fontSize: '1rem',
+                    position: 'relative',
+                    minHeight: '600px',
+                    width: '800px',
+                    maxWidth: '90%',
+                    margin: '0 auto',
+                }}>
+                    <h2 style={{ 
+                        marginTop: '0', 
+                        marginBottom: '24px', 
+                        background: 'white', 
+                        display: 'inline-block', 
+                        padding: '0 10px', 
+                        position: 'relative', 
+                        top: '-10px', 
+                        left: '-10px' 
+                    }}>
+                        {currentMonth}
+                    </h2>
+                    <div 
+                        contentEditable
+                        dangerouslySetInnerHTML={{ __html: notebookContent[currentMonth][currentPage].text }}
+                        onInput={handleContentChange}
+                        style={{ 
+                            margin: '0', 
+                            paddingBottom: '24px',
+                            minHeight: '300px',
+                            outline: 'none',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                            overflowWrap: 'break-word',
+
+                        }}
+                    />
+                    <div style={{ marginTop: '1rem' }}>
+                        {notebookContent[currentMonth][currentPage].images.map((image, index) => (
+                            <img key={index} src={image} alt={`Lab image ${index + 1}`} style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }} />
+                        ))}
+                    </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.25rem' }}>
+                    <button onClick={prevPage} disabled={currentMonth === 'July' && currentPage === 0}
+                        style={{  padding: '0.625rem', backgroundColor: '#ccc', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                        Previous Page
+                    </button>
+                    <span>Page {currentPage + 1}/{notebookContent[currentMonth].length}</span>
+                    <button onClick={nextPage} disabled={currentMonth === 'September' && currentPage === notebookContent['September'].length - 1}
+                        style={{ padding: '0.625rem', backgroundColor: '#ccc', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                        Next Page
+                    </button>
                 </div>
             </div>
-            <div class="supporters-container">
-                <h2 class="supporters-header">Our Supporters</h2>
-                <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
+        );
+    };
+
+    ReactDOM.render(<SimpleLabNotebook />, document.getElementById('root'));
+</script>
+        <footer class="end-section">
+        <div class="location-container">
+            <h2 class="map-header">Our Location</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2234.3080769841813!2d-3.177915484069889!3d55.92155432744188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7619777d9b7%3A0xfc241ebbe5c7a678!2sPeter%20Wilson%20Building%2C%20W%20Mains%20Rd%2C%20Edinburgh%20EH9%203JG%2C%20UK!5e0!3m2!1sen!2sus!4v1692648542208!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-        </footer>
-    </div>
-
-    <script>
-        // Intro animation nodes
-const introNodes = [
-    { x: 500, y: 300 }, { x: 200, y: 150 }, { x: 800, y: 150 },
-    { x: 200, y: 450 }, { x: 800, y: 450 }, { x: 350, y: 100 },
-    { x: 650, y: 100 }, { x: 350, y: 500 }, { x: 650, y: 500 },
-    { x: 100, y: 300 }, { x: 900, y: 300 }, { x: 400, y: 200 },
-    { x: 600, y: 200 }, { x: 400, y: 400 }, { x: 600, y: 400 },
-];
-
-// Create intro connections
-function createIntroConnections(nodes) {
-    return nodes.flatMap((node, i) => 
-        nodes.slice(i + 1).map(otherNode => `
-            <line 
-                x1="${node.x}" y1="${node.y}"
-                x2="${otherNode.x}" y2="${otherNode.y}"
-                class="intro-connection"
-            />
-        `)
-    ).join('');
-}
-
-// Create intro nodes
-function createIntroNodes(nodes) {
-    return nodes.map((node, index) => `
-        <circle 
-            cx="${node.x}" cy="${node.y}" r="20" 
-            class="intro-node"
-        />
-    `).join('');
-}
-
-// Add intro SVG content
-const introSvg = document.getElementById('intro-svg');
-introSvg.innerHTML += createIntroConnections(introNodes) + createIntroNodes(introNodes);
-
-// Animate intro
-function animateIntro() {
-    const introNodeElements = document.querySelectorAll('.intro-node');
-    const introLines = document.querySelectorAll('.intro-connection');
-
-    introNodeElements.forEach((node, index) => {
-        setTimeout(() => {
-            node.style.opacity = 1;
-            node.style.transform = 'scale(1)';
-        }, index * 100);
-    });
-
-    introLines.forEach((line, index) => {
-        setTimeout(() => {
-            line.style.strokeDashoffset = '0';
-        }, index * 50);
-    });
-
-    setTimeout(() => {
-        document.querySelector('.intro-title').style.opacity = 1;
-        document.querySelector('.intro-title').style.transform = 'translate(-50%, -50%) translateY(-20px)';
-    }, introNodeElements.length * 100 + introLines.length * 50 + 500);
-}
-
-// Scroll behavior
-const introContainer = document.querySelector('.intro-container');
-window.addEventListener('scroll', () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > window.innerHeight / 2) {
-        introContainer.style.opacity = '0';
-        introContainer.style.pointerEvents = 'none';
-    } else {
-        introContainer.style.opacity = '1';
-        introContainer.style.pointerEvents = 'auto';
-    }
-});
-
-// Popup functionality
-const nodes = document.querySelectorAll('.node-group');
-const popup = document.getElementById('popup');
-const popupTitle = document.getElementById('popup-title');
-const popupContent = document.getElementById('popup-content');
-const closeBtn = document.querySelector('.close-btn');
-
-// Sample data for each step (replace with your actual data)
-const stepInfo = {
-    "Directed Evolution": "This is the first step in our process...",
-    "Step 2": "In this step, we focus on...",
-    // Add information for all other steps yeahhh
-};
-
-nodes.forEach((node) => {
-    node.addEventListener('click', (e) => {
-        const stepName = node.querySelector('.node-text').textContent;
-        popupTitle.textContent = stepName;
-        popupContent.textContent = stepInfo[stepName] || "Information about this step is not available.";
-        popup.style.display = 'block';
-        e.stopPropagation();
-    });
-});
-
-closeBtn.addEventListener('click', () => {
-    popup.style.display = 'none';
-});
-
-document.addEventListener('click', (e) => {
-    if (e.target !== popup && !popup.contains(e.target)) {
-        popup.style.display = 'none';
-    }
-});
-
-// Initialize
-window.addEventListener('load', () => {
-    introContainer.style.opacity = '1';
-    introContainer.style.pointerEvents = 'auto';
-    animateIntro(); // Call the intro animation function
-});
-// Workflow animation
-function animateWorkflow() {
-    const nodes = document.querySelectorAll('.node-group');
-    const connections = document.querySelectorAll('.connection');
-
-    // Reset styles
-    nodes.forEach(node => {
-        node.style.opacity = '0';
-        node.style.transform = 'scale(0)';
-    });
-    connections.forEach(conn => {
-        conn.style.strokeDasharray = conn.getTotalLength();
-        conn.style.strokeDashoffset = conn.getTotalLength();
-    });
-
-    // Animate nodes
-    nodes.forEach((node, index) => {
-        setTimeout(() => {
-            node.style.transition = 'opacity 0.5s, transform 0.5s';
-            node.style.opacity = '1';
-            node.style.transform = 'scale(1)';
-        }, index * 50);
-    });
-
-    // Animate connections
-    setTimeout(() => {
-        connections.forEach((conn, index) => {
-            setTimeout(() => {
-                conn.style.transition = 'stroke-dashoffset 1s ease-in-out';
-                conn.style.strokeDashoffset = '0';
-            }, index * 20);
-        });
-    }, nodes.length * 50);
-}
-
-// Intersection Observer for workflow animation
-const workflowContainer = document.querySelector('.workflow-container');
-const workflowObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateWorkflow();
-            workflowObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-workflowObserver.observe(workflowContainer);
-    </script>
+        </div>
+        <div class="supporters-container">
+            <h2 class="supporters-header">Our Supporters</h2>
+            <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
+        </div>
+    </footer>
 </body>
 </html>
+    
