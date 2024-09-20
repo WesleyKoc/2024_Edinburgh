@@ -108,18 +108,19 @@
                 height: 300px;
             }
         }
-         #intro {
+                #intro {
             height: 100vh;
             width: 100%;
             position: relative;
             overflow: hidden;
+            border-bottom: solid 5px;
         }
 
         .introphoto {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .intro-text {
@@ -134,7 +135,20 @@
             opacity: 0;
             animation: slideIn 1s ease-out forwards;
         }
-
+        
+        .location-text {
+    position: absolute;
+    left: 50%;
+    bottom: 2.5vh;
+    transform: translateX(-50%);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    opacity: 0;
+    animation: slideIn 1s ease-out forwards;
+    white-space: nowrap;
+}
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -161,8 +175,8 @@
                 <div class="dropdown-content">
                     <a href="/2024_Edinburgh/docs/project/Description-project.html">Description</a>
                     <a href="/2024_Edinburgh/docs/project/Results-project.html">Results</a>
-                    <a href="/2024_Edinburgh/docs/project/Workflow-project.html">Workflow and methods</a>
-                    <a href="/2024_Edinburgh/docs/project/Supplementary.html">Supplementary</a>
+                    <a href="/2024_Edinburgh/docs/project/Workflow-project.html">Workflow</a>
+                    <a href="/2024_Edinburgh/docs/project/Supplementary.html">Methods</a>
                 </div>
             </div>
             <a href="/2024_Edinburgh/docs/Team/teampage.html">Team</a>
@@ -171,8 +185,9 @@
         </div>
     </nav>
     <div id="intro">
-        <img src="/2024_Edinburgh/docs/img/arthursseat.jpg" alt="Arthurs seat" class="introphoto">
+        <img src="/2024_Edinburgh/docs/img/roger_land_1.jpg" alt="Arthurs seat" class="introphoto">
         <div class="intro-text">Meet the team</div>
+        <div class="location-text">Roger Land Building, Institute of Biotechnology, University of Edinburgh</div>
     </div>
 <h3>The Team</h3>
 
@@ -202,7 +217,7 @@
             <img src="pBAD_curli.png" alt="Maximilian Lanz">
             <div class="member-info">
                 <div class="name">Maximilian Lanz</div>
-                <div class="bio">I went to Vienna</div>
+                <div class="bio"></div>
             </div>
         </div>
         <div class="team-member">
@@ -271,7 +286,7 @@
             <h2 class="supporters-header">Our Supporters</h2>
             <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
         </div>
-    </footer>
+</footer>
     
 </body>
 </html>
