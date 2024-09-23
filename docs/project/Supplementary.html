@@ -46,6 +46,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -122,16 +123,16 @@
         };
 
         const MethodsContent = () => {
-            const methods = [
-                { title: "PCR Analysis (click to expand)", description: "Polymerase Chain Reaction (PCR) is a method used to rapidly make millions to billions of copies of a specific DNA sample, allowing scientists to take a very small sample of DNA and amplify it to a large enough amount to study in detail.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Cell Culture", description: "Cell culture is the process by which cells are grown under controlled conditions, generally outside their natural environment. This technique is one of the major tools used in cellular and molecular biology, providing model systems for studying cell biology, tissue physiology, and mechanisms of diseases.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Western Blot", description: "Western blotting is an important technique used in cell and molecular biology. It allows researchers to identify specific proteins from a complex mixture of proteins extracted from cells. The technique uses three elements to accomplish this task: separation by size, transfer to a solid support, and marking target protein using a proper primary and secondary antibody to visualize.", imageUrl: "/api/placeholder/400/300" },
-                { title: "CRISPR", description: "CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) is a family of DNA sequences found in the genomes of prokaryotic organisms such as bacteria and archaea. These sequences are derived from DNA fragments of bacteriophages that had previously infected the prokaryote. They are used to detect and destroy DNA from similar bacteriophages during subsequent infections. In biotechnology, the CRISPR/Cas system is a gene editing technology.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Flow Cytometry", description: "Flow cytometry is a laser-based, biophysical technology employed in cell counting, cell sorting, biomarker detection and protein engineering, by suspending cells in a stream of fluid and passing them by an electronic detection apparatus. It allows simultaneous multiparametric analysis of the physical and chemical characteristics of up to thousands of particles per second.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },
-                { title: "Microscopy", description: "Microscopy is the technical field of using microscopes to view objects and areas of objects that cannot be seen with the naked eye (objects that are not within the resolution range of the normal eye). There are three well-known branches of microscopy: optical, electron, and scanning probe microscopy. This method is crucial for visualizing cellular structures and processes in biology and medicine.", imageUrl: "/api/placeholder/400/300" },  
+             const methods = [
+                { title: "Q5 Standard PCR (click to expand)", description: " ", imageUrl: "/2024_Edinburgh/docs/img/Q5.jpeg" },
+                { title: "Q5 Megaprimer PCR", description: " ", imageUrl: "/2024_Edinburgh/docs/img/megaprimer.png" },
+                { title: "Q5 Full-length gene PCR", description: " ", imageUrl: "/2024_Edinburgh/docs/img/fulllength.png" },
+                { title: "Gibson Assembly", description: " ", imageUrl: "/2024_Edinburgh/docs/img/gibsonassembly.png" },
+                { title: "Competent Cell preparation", description: " ", imageUrl: "/2024_Edinburgh/docs/img/competentcells.png" },
+                { title: "Transformation", description: " ", imageUrl: "/2024_Edinburgh/docs/img/transformation.png" },
+                { title: "Crystal Violet Biofilm Assay", description: " ", imageUrl: "/2024_Edinburgh/docs/img/cvs.png" },
+                { title: "DpnI Digest)", description: " ", imageUrl: "/2024_Edinburgh/docs/img/DpnI.png" },
+                { title: "PCR product Clean-up", description: " ", imageUrl: "/2024_Edinburgh/docs/img/qiapcr.jpeg" },  
             ];
 
            return (
