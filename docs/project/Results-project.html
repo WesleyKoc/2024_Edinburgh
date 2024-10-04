@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Results</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-<link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <title>Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+    <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide-react/0.263.1/lucide-react.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -25,9 +30,8 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
-    <main class="content-section">
-        <div class="content-placeholder">Add content here</div>
-    </main>
+
+    <div id="results-root"></div>
 
     <footer class="end-section">
         <div class="location-container">
@@ -41,6 +45,174 @@
             <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
         </div>
     </footer>
-</body>
 
+    <script type="text/babel">
+        const { ChevronDown } = window.lucideReact || {};
+
+        const ResultsSection = () => {
+            const [activeSection, setActiveSection] = React.useState(null);
+
+            const sections = [
+                { 
+                    id: '3.0', 
+                    title: 'Computational Analysis and Site Selection for Mutagenesis',
+                    content: (
+                        <div>
+                            <p className="mb-4">Our computational analysis revealed key sites for mutagenesis in the CsgA and Ag43 proteins. We identified 3 potential sites in CsgA and 2 in Ag43 that could significantly affect biofilm formation.</p>
+                            <img src="/api/placeholder/600/400" alt="Protein structure highlighting mutation sites" className="w-full mb-4 rounded-lg shadow-md" />
+                            <p className="mb-4">Figure 1: 3D model of CsgA protein with highlighted mutation sites.</p>
+                            <table className="w-full border-collapse border border-gray-300 mb-4">
+                                <thead>
+                                    <tr className="bg-gray-100">
+                                        <th className="border border-gray-300 p-2">Protein</th>
+                                        <th className="border border-gray-300 p-2">Mutation Site</th>
+                                        <th className="border border-gray-300 p-2">Predicted Effect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-gray-300 p-2">CsgA</td>
+                                        <td className="border border-gray-300 p-2">Arg45</td>
+                                        <td className="border border-gray-300 p-2">Increased biofilm formation</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-300 p-2">CsgA</td>
+                                        <td className="border border-gray-300 p-2">Gly78</td>
+                                        <td className="border border-gray-300 p-2">Decreased biofilm formation</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-300 p-2">Ag43</td>
+                                        <td className="border border-gray-300 p-2">Lys123</td>
+                                        <td className="border border-gray-300 p-2">Altered surface adhesion</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                },
+                { 
+                    id: '3.1', 
+                    title: 'Amplification: CsgA gene, CsgA vector, Ag43 gene, Ag43 vector',
+                    content: (
+                        <div>
+                            <p className="mb-4">We successfully amplified the CsgA and Ag43 genes, as well as their respective vectors. The gel electrophoresis results confirmed the expected band sizes.</p>
+                            <img src="/api/placeholder/600/400" alt="Gel electrophoresis results" className="w-full mb-4 rounded-lg shadow-md" />
+                            <p className="mb-4">Figure 2: Gel electrophoresis results showing successful amplification of CsgA and Ag43 genes and vectors.</p>
+                        </div>
+                    )
+                },
+                { 
+                    id: '3.2', 
+                    title: 'CsgA Error-Prone results',
+                    content: (
+                        <div>
+                            <p className="mb-4">The error-prone PCR for CsgA resulted in a library of mutants. Sequencing revealed an average of 2-3 mutations per gene.</p>
+                            <table className="w-full border-collapse border border-gray-300 mb-4">
+                                <thead>
+                                    <tr className="bg-gray-100">
+                                        <th className="border border-gray-300 p-2">Mutant</th>
+                                        <th className="border border-gray-300 p-2">Mutation(s)</th>
+                                        <th className="border border-gray-300 p-2">Observed Effect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-gray-300 p-2">CsgA-M1</td>
+                                        <td className="border border-gray-300 p-2">A45T, G78S</td>
+                                        <td className="border border-gray-300 p-2">Enhanced biofilm formation</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-300 p-2">CsgA-M2</td>
+                                        <td className="border border-gray-300 p-2">R56H</td>
+                                        <td className="border border-gray-300 p-2">Reduced biofilm formation</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="border border-gray-300 p-2">CsgA-M3</td>
+                                        <td className="border border-gray-300 p-2">L34P, Q89R, T102A</td>
+                                        <td className="border border-gray-300 p-2">No significant change</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                },
+                
+                { 
+                    id: '3.3', 
+                    title: 'Amplification: CsgA and Ag43 Megaprimer Full-Length Results',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+                
+                { 
+                    id: '3.4', 
+                    title: 'Ag43 Inverse PCR Results',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+                { 
+                    id: '3.5', 
+                    title: 'Baseline Biofilm Comparison',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+                { 
+                    id: '3.6', 
+                    title: 'CsgA Biofilm Results',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+                { 
+                    id: '3.7', 
+                    title: 'Oxford-Nanopore Sequencing Results',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+            ];
+
+            const toggleSection = (id) => {
+                setActiveSection(activeSection === id ? null : id);
+            };
+
+            return (
+                <div className="max-w-4xl mx-auto p-6">
+                    <h2 className="text-3xl font-bold mb-8 text-center text-indigo-700">Results</h2>
+                    {sections.map((section) => (
+                        <div key={section.id} className="mb-4 border-b border-gray-200 pb-4">
+                            <button
+                                className="w-full px-4 py-3 text-left font-semibold flex justify-between items-center focus:outline-none hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                                onClick={() => toggleSection(section.id)}
+                            >
+                                <span className="text-lg">{section.id} {section.title}</span>
+                                {ChevronDown && <ChevronDown size={24} />}
+                            </button>
+                            {activeSection === section.id && (
+                                <div className="p-4 mt-2">
+                                    {section.content}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<ResultsSection />, document.getElementById('results-root'));
+    </script>
+</body>
 </html>
