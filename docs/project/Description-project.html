@@ -1,10 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Project Description</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-<link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Description</title>
+    <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+        .content-section {
+            position: relative;
+            height: calc(100vh - 2px); /* Adjust based on your navbar and footer height */
+            width: 100%;
+            overflow: hidden;
+            margin-top: 5px; /* Adjust based on your navbar height */
+        }
+        .scroll-content {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .scroll-section {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.5s ease;
+        }
+        .scroll-text, .scroll-image {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .scroll-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .scroll-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .scroll-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .scroll-text p {
+            font-size: 1.2rem;
+        }
+        .scroll-section:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        @keyframes slideFromLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideFromRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes rotateIn {
+            from { transform: rotate(-90deg); opacity: 0; }
+            to { transform: rotate(0); opacity: 1; }
+        }
+        
+        .animate-slide-left { animation: slideFromLeft 1s ease forwards; }
+        .animate-slide-right { animation: slideFromRight 1s ease forwards; }
+        .animate-fade { animation: fadeIn 1s ease forwards; }
+        .animate-scale { animation: scaleIn 1s ease forwards; }
+        .animate-rotate { animation: rotateIn 1s ease forwards; }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -25,8 +113,64 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
+    
     <main class="content-section">
-        <div class="content-placeholder">Add content here</div>
+        <div class="scroll-content">
+            <section class="scroll-section" id="section1">
+                <div class="scroll-text">
+                    <h2>Our Research Problem</h2>
+                    <h3>Addressing Key Challenges</h3>
+                    <p>Here, describe the problem our research is trying to address in detail. Explain the significance of the issue and why it's important to solve.</p>
+                </div>
+                <div class="scroll-image">
+                    <img src="/2024_Edinburgh/docs/img/roger.jpeg" alt="Research Problem Visualization">
+                </div>
+            </section>
+            
+            <section class="scroll-section" id="section2">
+                <div class="scroll-text">
+                    <h2>Our Approach</h2>
+                    <h3>Innovative Methodologies</h3>
+                    <p>Describe research approach here. Explain the unique methods or techniques we are using to tackle the problem.</p>
+                </div>
+                <div class="scroll-image">
+                    <img src="/2024_Edinburgh/docs/img/jeff.jpeg" alt="Research Approach Visualization">
+                </div>
+            </section>
+            
+            <section class="scroll-section" id="section3">
+                <div class="scroll-text">
+                    <h2>Key Findings</h2>
+                    <h3>Breakthrough Discoveries</h3>
+                    <p>Highlight our key research findings here. Discuss the most important results.</p>
+                </div>
+                <div class="scroll-image">
+                    <img src="/api/placeholder/600/400" alt="Key Findings Visualization">
+                </div>
+            </section>
+            
+            <section class="scroll-section" id="section4">
+                <div class="scroll-text">
+                    <h2>Impact</h2>
+                    <h3>Transforming the Field</h3>
+                    <p>Discuss the potential impact of our research here. Explain how our findings could change the industry or benefit society.</p>
+                </div>
+                <div class="scroll-image">
+                    <img src="/api/placeholder/600/400" alt="Research Impact Visualization">
+                </div>
+            </section>
+            
+            <section class="scroll-section" id="section5">
+                <div class="scroll-text">
+                    <h2>Future Directions</h2>
+                    <h3>Next Steps in Research</h3>
+                    <p>Outline future directions for our research here. Discuss potential next steps and areas for further exploration.</p>
+                </div>
+                <div class="scroll-image">
+                    <img src="/api/placeholder/600/400" alt="Future Directions Visualization">
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer class="end-section">
@@ -41,6 +185,61 @@
             <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
         </div>
     </footer>
-</body>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const scrollContent = document.querySelector('.scroll-content');
+            const sections = document.querySelectorAll('.scroll-section');
+            let currentSection = 0;
+            let isScrolling = false;
+
+            const animationClasses = [
+                ['animate-slide-left', 'animate-slide-right'],
+                ['animate-fade', 'animate-scale'],
+                ['animate-rotate', 'animate-fade'],
+                ['animate-scale', 'animate-slide-right'],
+                ['animate-slide-left', 'animate-rotate']
+            ];
+
+            function updateSections() {
+                sections.forEach((section, index) => {
+                    section.style.transform = `translateY(${(index - currentSection) * 100}%)`;
+                    const textContent = section.querySelector('.scroll-text');
+                    const imageContent = section.querySelector('.scroll-image');
+                    
+                    if (index === currentSection) {
+                        textContent.classList.add(animationClasses[index % animationClasses.length][0]);
+                        imageContent.classList.add(animationClasses[index % animationClasses.length][1]);
+                    } else {
+                        textContent.classList.remove(animationClasses[index % animationClasses.length][0]);
+                        imageContent.classList.remove(animationClasses[index % animationClasses.length][1]);
+                    }
+                });
+            }
+
+            function handleScroll(event) {
+                if (isScrolling) return;
+                isScrolling = true;
+                
+                if (event.deltaY > 0 && currentSection < sections.length - 1) {
+                    currentSection++;
+                } else if (event.deltaY < 0 && currentSection > 0) {
+                    currentSection--;
+                }
+                
+                updateSections();
+                
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 500); // Matches the transition time in CSS
+            }
+
+            window.addEventListener('wheel', handleScroll);
+            window.addEventListener('resize', updateSections);
+            
+            // Initial setup
+            updateSections();
+        });
+    </script>
+</body>
 </html>
