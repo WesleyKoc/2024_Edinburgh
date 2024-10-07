@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
     <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
     <style>
-        /* Base styles */
+        
 body, html {
     margin: 0;
     padding: 0;
@@ -14,13 +14,12 @@ body, html {
 }
 
 
-/* Updated navbar styles */
 .navbar {
     z-index: 2000;
         }
 
 
-/* Intro container styles */
+
 .intro-container {
     width: 100%;
     height: 120vh;
@@ -85,10 +84,10 @@ body, html {
     z-index: 1;
     background-color: ghostwhite;
     min-height: 100vh;
-    padding-top: 100vh; /* To offset for the intro container */
+    padding-top: 100vh; 
 }
 
-/* Workflow container styles */
+
 .workflow-container {
     width: 100%;
     min-height: 1500px;
@@ -102,7 +101,7 @@ body, html {
     height: auto;
 }
 
-/* Node styles */
+
 .node {
     fill: #00a8ff;
     stroke: #000;
@@ -123,7 +122,7 @@ body, html {
     pointer-events: none;
 }
 
-/* Connection styles */
+
 .node-group {
     opacity: 0;
     transform: scale(0);
@@ -139,7 +138,7 @@ body, html {
     fill: none;
 }
 
-/* Popup styles */
+
 .popup {
     display: none;
     position: fixed;
@@ -173,7 +172,7 @@ body, html {
     cursor: pointer;
     color: #999;
 }
-/* Additional styles for responsiveness */
+/* Additional styles for responsiveness I guess.. */
 @media (max-width: 768px) {
     .intro-title {
         font-size: 3rem;
@@ -243,7 +242,7 @@ body, html {
                     </feMerge>
                 </filter>
             </defs>
-            <!-- Intro SVG content will be dynamically added here -->
+            <!-- Intro SVG content will be dynamically added here,perhaps.... -->
         </svg>
         <h1 class="intro-title">Our Workflow</h1>
     </div>
@@ -259,7 +258,7 @@ body, html {
                 </defs>
                 <g class="connections">
                         <!-- Main Connections -->
-                <path d="M700 100 L700 300" class="connection" marker-end="url(#arrowhead)" />
+                
                 <path d="M700 300 L700 500" class="connection" marker-end="url(#arrowhead)" />
                 <path d="M700 500 L900 600" class="connection" marker-end="url(#arrowhead)" />
                 <path d="M700 500 L900 750" class="connection" marker-end="url(#arrowhead)" />
@@ -317,7 +316,7 @@ body, html {
                 <g class="nodes">
                      <g id="node1" class="node-group">
                     <circle cx="700" cy="100" r="60" class="node" />
-                    <text x="700" y="100" dy=".3em" class="node-text">Our Workflow</text>
+                    <text x="700" y="100" dy=".3em" class="node-text">Click Me</text>
                 </g>
                 <g id="node2" class="node-group">
                     <circle cx="700" cy="300" r="60" class="node" />
@@ -329,7 +328,7 @@ body, html {
                 </g>
                  <g id="node2.75" class="node-group">
                     <circle cx="1300" cy="350" r="100" class="node" />
-                    <text x="1300" y="350" dy=".4em" class="node-text">Site-Directed Mutagensis</text>
+                    <text x="1300" y="350" dy=".4em" class="node-text">Site-Directed Mutagenesis</text>
                 </g>
                 <g id="node3" class="node-group">
                     <circle cx="700" cy="500" r="60" class="node" />
@@ -337,7 +336,7 @@ body, html {
                 </g>
                 <g id="node4" class="node-group">
                     <circle cx="900" cy="600" r="60" class="node" />
-                    <text x="900" y="600" dy=".3em" class="node-text">Asymmeteric PCR</text>
+                    <text x="900" y="600" dy=".3em" class="node-text">Asymmetric PCR</text>
                 </g>
                 <g id="node5" class="node-group">
                     <circle cx="900" cy="750" r="60" class="node" />
@@ -367,15 +366,15 @@ body, html {
                 </g>
                 <g id="node12" class="node-group">
                     <circle cx="1100" cy="800" r= "50" class="node subnode" />
-                    <text x="1100" y="800" dy=".3em" class="node-text">Verify Size</text>
+                    <text x="1100" y="800" dy=".3em" class="node-text">Purify</text>
                 </g>
                 <g id="node13" class="node-group">
                     <circle cx="1100" cy="900" r="50" class="node subnode" />
-                    <text x="1100" y="900" dy=".3em" class="node-text">Purify</text>
+                    <text x="1100" y="900" dy=".3em" class="node-text">Verify Size</text>
                 </g>
                 <g id="node14" class="node-group">
                     <circle cx="1100" cy="1000" r="50" class="node subnode" />
-                    <text x="1100" y="1000" dy=".3em" class="node-text">Verify size</text>
+                    <text x="1100" y="1000" dy=".3em" class="node-text">Verify Size</text>
                 </g>
                 <g id="node15" class="node-group">
                     <circle cx="1100" cy="1100" r="50" class="node subnode" />
@@ -385,7 +384,7 @@ body, html {
                 <!-- Left Sub-nodes -->
                 <g id="node16" class="node-group">
                     <circle cx="300" cy="500" r="50" class="node subnode" />
-                    <text x="300" y="500" dy=".3em" class="node-text">Verify size</text>
+                    <text x="300" y="500" dy=".3em" class="node-text">Verify Size</text>
                 </g>
                 <g id="node17" class="node-group">
                     <circle cx="300" cy="700" r="50" class="node subnode" />
@@ -401,19 +400,19 @@ body, html {
                 </g>
                 <g id="node20" class="node-group">
                     <circle cx="1300" cy="750" r="60" class="node subsubnode" />
-                    <text x="1300" y="750" dy=".3em" class="node-text">Step 20</text>
+                    <text x="1300" y="750" dy=".3em" class="node-text">Symmetric PCR</text>
                 </g>
                 <g id="node21" class="node-group">
                     <circle cx="1500" cy="675" r="50" class="node subsubnode" />
-                    <text x="1500" y="675" dy=".3em" class="node-text">Step 21</text>
+                    <text x="1500" y="675" dy=".3em" class="node-text">Verify Size</text>
                 </g>
                 <g id="node22" class="node-group">
                     <circle cx="1500" cy="825" r="50" class="node subsubnode" />
-                    <text x="1500" y="825" dy=".3em" class="node-text">Step 22</text>
+                    <text x="1500" y="825" dy=".3em" class="node-text">Purify</text>
                 </g>
                 <g id="node23" class="node-group">
                     <circle cx="1500" cy="1100" r="50" class="node subsubnode" />
-                    <text x="1500" y="1100" dy=".3em" class="node-text">Step 23</text>
+                    <text x="1500" y="1100" dy=".3em" class="node-text">Cloning</text>
                 </g>
                 <g id="node24" class="node-group">
                     <circle cx="100" cy="700" r="60" class="node subnode" />
@@ -433,67 +432,67 @@ body, html {
                 </g>
                 <g id="node28" class="node-group">
                     <circle cx="700" cy="1200" r="60" class="node" />
-                    <text x="700" y="1200" dy=".3em" class="node-text">Step 28</text>
+                    <text x="700" y="1200" dy=".3em" class="node-text">Transformation 1</text>
                 </g>
                 <g id="node29" class="node-group">
                     <circle cx="600" cy="1300" r="60" class="node" />
-                    <text x="600" y="1300" dy=".3em" class="node-text">Step 29</text>
+                    <text x="600" y="1300" dy=".3em" class="node-text">Inoculation in LB</text>
                 </g>
                 <g id="node30" class="node-group">
                     <circle cx="800" cy="1300" r="60" class="node" />
-                    <text x="800" y="1300" dy=".3em" class="node-text">Step 30</text>
+                    <text x="800" y="1300" dy=".3em" class="node-text">Plating</text>
                 </g>
                 <g id="node31" class="node-group">
                     <circle cx="450" cy="1300" r="60" class="node" />
-                    <text x="450" y="1300" dy=".3em" class="node-text">Step 31</text>
+                    <text x="450" y="1300" dy=".3em" class="node-text">Miniprep</text>
                 </g>
                 <g id="node32" class="node-group">
                     <circle cx="950" cy="1300" r="60" class="node" />
-                    <text x="950" y="1300" dy=".3em" class="node-text">Step 32</text>
+                    <text x="950" y="1300" dy=".3em" class="node-text">Pick colonies</text>
                 </g>
                 <g id="node33" class="node-group">
                     <circle cx="450" cy="1450" r="60" class="node" />
-                    <text x="450" y="1450" dy=".3em" class="node-text">Step 33</text>
+                    <text x="450" y="1450" dy=".3em" class="node-text">Transformation 2</text>
                 </g>
                 <g id="node34" class="node-group">
                     <circle cx="950" cy="1450" r="60" class="node" />
-                    <text x="950" y="1450" dy=".3em" class="node-text">Step 34</text>
+                    <text x="950" y="1450" dy=".3em" class="node-text">Miniprep</text>
                 </g>
                  <g id="node35" class="node-group">
                     <circle cx="600" cy="1450" r="60" class="node" />
-                    <text x="600" y="1450" dy=".3em" class="node-text">Step 35</text>
+                    <text x="600" y="1450" dy=".3em" class="node-text">Plating</text>
                 </g>
                 <g id="node36" class="node-group">
                     <circle cx="600" cy="1600" r="60" class="node" />
-                    <text x="600" y="1600" dy=".3em" class="node-text">Step 36</text>
+                    <text x="600" y="1600" dy=".3em" class="node-text">Transfer colonies</text>
                 </g>
                 <g id="node37" class="node-group">
                     <circle cx="450" cy="1600" r="60" class="node" />
-                    <text x="450" y="1600" dy=".3em" class="node-text">Step 37</text>
+                    <text x="450" y="1600" dy=".3em" class="node-text">Assay (Day 1)</text>
                 </g>
                 <g id="node38" class="node-group">
                     <circle cx="450" cy="1750" r="60" class="node" />
-                    <text x="450" y="1750" dy=".3em" class="node-text">Step 38</text>
+                    <text x="450" y="1750" dy=".3em" class="node-text">Assay (Day 2)</text>
                 </g>
                 <g id="node39" class="node-group">
                     <circle cx="600" cy="1750" r="60" class="node" />
-                    <text x="600" y="1750" dy=".3em" class="node-text">Step 39</text>
+                    <text x="600" y="1750" dy=".3em" class="node-text">Assay (Day 3)</text>
                 </g>
                 <g id="node40" class="node-group">
                     <circle cx="600" cy="1900" r="60" class="node" />
-                    <text x="600" y="1900" dy=".3em" class="node-text">Step 40</text>
+                    <text x="600" y="1900" dy=".3em" class="node-text">Spectrophotometer</text>
                 </g>
                 <g id="node41" class="node-group">
                     <circle cx="600" cy="2050" r="60" class="node" />
-                    <text x="600" y="2050" dy=".3em" class="node-text">Step 41</text>
+                    <text x="600" y="2050" dy=".3em" class="node-text">Analyze</text>
                 </g>
                 <g id="node42" class="node-group">
                     <circle cx="800" cy="1450" r="60" class="node" />
-                    <text x="800" y="1450" dy=".3em" class="node-text">Step 42</text>
+                    <text x="800" y="1450" dy=".3em" class="node-text">Sequencing</text>
                 </g>
                 <g id="node43" class="node-group">
                     <circle cx="800" cy="1600" r="60" class="node" />
-                    <text x="800" y="1600" dy=".3em" class="node-text">Step 43</text>
+                    <text x="800" y="1600" dy=".3em" class="node-text">Analyze results</text>
                 </g>
                 </g>
             </svg>
@@ -524,7 +523,7 @@ body, html {
     </div>
 
     <script>
-        // Intro animation nodes
+        // Intro animation nodes, a pain to figure out
 const introNodes = [
     { x: 500, y: 300 }, { x: 200, y: 150 }, { x: 800, y: 150 },
     { x: 200, y: 450 }, { x: 800, y: 450 }, { x: 350, y: 100 },
@@ -584,7 +583,7 @@ function animateIntro() {
     }, introNodeElements.length * 100 + introLines.length * 50 + 500);
 }
 
-// Scroll behavior
+// Scroll behavior, makes it dynamic, nice looking, appleesque
 const introContainer = document.querySelector('.intro-container');
 window.addEventListener('scroll', () => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -605,10 +604,36 @@ const popupTitle = document.getElementById('popup-title');
 const popupContent = document.getElementById('popup-content');
 const closeBtn = document.querySelector('.close-btn');
 
-// Sample data for each step (replace with your actual data)
+
 const stepInfo = {
-    "Directed Evolution": "This is the first step in our process...",
-    "Step 2": "In this step, we focus on...",
+    "Click Me": "This flowchart displays our research process. We aim to make our work both accessible and reproducible, and we hope this flowchart is useful in doing so. Please click on the different steps to learn more. If the interactive features are unavailable on certain browsers, please scroll down further to a find a static version of our workflow. Enjoy!",
+    "Starting materials": "We obtained E.Coli MG1655 cells hosting pBAD-Ag43 and pBAD-Curli plasmids from the Sadler Lab. We cultured these overnight in 0.1% Ampicillin LB",
+    "Site-Directed Mutagenesis": "The right side of the flowchart focuses on our process for site-directed mutagenesis using the megaprimer method. We chose this method due to feasibility of combining specific mutations using the megaprimers. Due to time constraints we were unable to reach this step, however, for anyone interested in conducting future work using our current data, this method would be optimal.",
+    "Error-prone PCR": "In addition to site-directed mutagenesis (right), we also attempted to conduct random mutagensis of CsgA using Error-prone PCR. Unfortunately, our several attempts yielded CsgA genes with no mutations. We are unsure why, but have provided the steps we utilized if future work would like to fix this method or avoid it altogether.",
+    "Asymmetric PCR": "We used asymmetric PCR to generate megaprimers. Please refer to our methods section for a detailed description of our process.",
+    "Amplify Gene": "We conducted a PCR using Q5 High Fidelity enzyme from NEB to amplify our genes. Please refer to our methods section for a detailed description of our process.",
+    "Amplify Backbone": "We conducted a PCR using Q5 High Fidelity enzyme from NEB to amplify our plasmid backbone. Please refer to our methods section for a detailed description of our process.",
+    "Purify": "Our purification of PCR products involves three steps: 1. Conducting a DpnI digest to remove any residual template plasmid. 2. Conducting PCR clean-up using Wizard® SV Gel and PCR Clean-Up System. 3. Measuring concentration of our products using a Nanodrop. Please refer to our method section for more details about our processes. ",
+    "Cloning": "We used Gibson Assembly to clone our mutant genes into the plasmid backbone. Please refer to our methods section for a detailed description of our process.",
+    "Verify Size": "Verification of our PCR products is a crucial step in our method. We use Gel Electrophoresis to do so, which tells us the size of our products. We measure the size by running a DNA ladder alongside our products. This step also indicates if any secondary products were formed in the PCR. In such cases, we would purify our samples by Gel extraction instead of PCR Clean-up, however, we did not get any secondary products in our PCRs as we had optimized our method.",
+    "EP-PCR for CsgA": "Please refer to our methods section for more information about this step.",
+    "Amplify CsgA gene": "We conducted a PCR using Q5 High Fidelity enzyme from NEB to amplify our CsgA gene. Please refer to our methods section for a detailed description of our process.",
+    "Transformation 1": "We transformed NEB 5-alpha Competent E. coli (C2987) with our plasmids to amplify them. Please refer to our methods section for a detailed description of our process. ",
+    "Transformation 2": "We transformed competent E.Coli MG1655 - double knockout (DK) of Curli operons and Ag43 gene with miniprepped plasmids from the previous step. Please refer to our methods section for a detailed description of how we conducted our transformation and how we made competent cells.",
+    "Plating": "We plated our transformed cells on 0.1% Ampicillin LB Agar and left the plates at 37°C overnight",
+    "Transfer colonies": "We picked single colonies which hosted our mutant plasmids from the LB plate and transfered them into a well on a 96-well plate. This plate will serve as the master plate for our assay. This step and the subsequent assay was conducted by the Edinburgh Genome Foundry, who host a robotic colony picker and acoustic dispenser. This significantly expedited our process. For each mutant 96 colonies were screened. NNK has 32 possible nucleotide combinations it can generate. In order to screen 95% of the possible outcomes for each mutant, 3x the library size was assayed.",
+    "Assay (Day 1)": "On day one, overnight cultures (from the master plate) of our transformed MG1655 (DK) cells were placed in a shaking incubator on a new 96 well plate (assay plate). Please refer to our methods section for a detailed description of our process. ",
+    "Assay (Day 2)": "The production of CsgA was induced in our assay plate by the addition of arabinose solution. Please refer to our methods section for a detailed description of our process.",
+    "Assay (Day 3)": "After allowing the induced cells to grow for 18 hours, we conducted Crystal Violet Staining to quantify biolfilm formation on the polystyrene. Please refer to our methods section for a detailed description of our process.",
+    "Pick colonies": "After plating 1/4 of our transformed cells on 0.1% Ampicillin LB Agar, we picked a few colonies (3-6) and cultured them overnight in 5ml of 0.1% Ampicillin LB.",
+    "Spectrophotometer": "Following the last step, we measure the absorbance (Abs550) of the wells.",
+    "Analyze": "These results are recieved in the form of an excel sheet, which we then analyze. Please refer to our results section for more information",
+    "Analyze results": "We view our sequencing results on Benchling by creating an alignment against the non-mutant plasmid.",
+    "Sequencing": "The miniprepped plasmids from our overnight cultures was sent for Sanger Sequencing. This verification step allows us to see if our mutagenesis has worked.",
+    "Inoculation in LB": "We inoculated 3/4 of our transformed cells in 5ml of 0.1% Ampicillin LB.",
+    "Miniprep": "The miniprep allows us to extract plasmids from host cells. This involves culturing the host cells overnight in 5ml of 0.1% Ampicillin LB (as done in the previous step), then following the instructions on the QIAprep Spin Miniprep Kit. These instructions are available on the manufacturer website. The kit provides us with all the required reagents to do the miniprep. We made a slight alteration to the manufacturers method, where we elute our DNA with DNAase free water instead of EB Buffer. We then measure the concentration of the obtained plasmid sample on a Nandrop.",
+   
+    
     // Add information for all other steps yeahhh
 };
 
