@@ -10,23 +10,20 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            height: 100%;
             width: 100%;
         }
         .content-section {
-            position: relative;
-            height: calc(100vh - 2px); /* Adjust based on your navbar and footer height */
-            width: 100%;
-            overflow: hidden;
-            margin-top: 5px; /* Adjust based on your navbar height */
-        }
+    position: relative;
+    height: calc(100vh - 1px); /* Adjust based on your navbar and footer height */
+    width: 100%;
+    overflow: hidden;
+    margin-top: -5px; /* Changed to a negative value to move up */
+}
         .scroll-content {
-            height: 100%;
             width: 100%;
-            overflow: hidden;
+            overflow: visible;
         }
         .scroll-section {
-            height: 100%;
             width: 100%;
             display: flex;
             align-items: center;
@@ -38,7 +35,6 @@
         }
         .scroll-text, .scroll-image {
             flex: 1;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -86,7 +82,17 @@
             from { transform: rotate(-90deg); opacity: 0; }
             to { transform: rotate(0); opacity: 1; }
         }
-        
+        .em {
+            font-style: italic;
+        }
+        .scroll-section3{
+            padding-top: 5px;
+        }
+        .scroll-image3{
+            height: 70%;
+            width: 70%;
+        }
+       
         .animate-slide-left { animation: slideFromLeft 1s ease forwards; }
         .animate-slide-right { animation: slideFromRight 1s ease forwards; }
         .animate-fade { animation: fadeIn 1s ease forwards; }
@@ -120,56 +126,58 @@
         <div class="scroll-content">
             <section class="scroll-section" id="section1">
                 <div class="scroll-text">
-                    <h2>Our Research Problem</h2>
-                    <h3>Addressing Key Challenges</h3>
-                    <p>Here, describe the problem our research is trying to address in detail. Explain the significance of the issue and why it's important to solve.</p>
+                    <h2>
+                    <em>The Problem</em>
+                    </h2>
+                    <h3>Our planet is choking on plastics and recycling methods are energy-intensive and largely inefficient</h3>
+                    <p>Only 9% of all plastics produced are recycled (Organization for Economic Co-operation and Development, 2022) <br><br> 50% of plastics end up in landfills and 22% are leaked into our environments (Organization for Economic Co-operation and Development, 2022). A better solution is needed </p>
                 </div>
                 <div class="scroll-image">
-                    <img src="/2024_Edinburgh/docs/img/roger.jpeg" alt="Research Problem Visualization">
+                    <img src="/2024_Edinburgh/docs/img/plasticpollution.jpg" alt="Research Problem Visualization">
                 </div>
             </section>
             
             <section class="scroll-section" id="section2">
                 <div class="scroll-text">
-                    <h2>Our Approach</h2>
-                    <h3>Innovative Methodologies</h3>
-                    <p>Describe research approach here. Explain the unique methods or techniques we are using to tackle the problem.</p>
+                    <h2><em>A Potential Solution</em></h2>
+                    <h3>Recent discoveries of a toolbox of biocatalysts, capable of plastic degradation, offers a biotechnological solution to address the plastic waste crisis</h3>
+                    <p>In 2016, researchers at the Kyoto Institute of Technology identified a bacteria, <em>Ideonella sakaiensis</em>, that can metabolise plastics through enzymatic PET (PETase) degradation. Research is emerging that explores the potential role of other such enzymes as molecular tools in biodegradation <br> However, to increase the efficiency of these novel degradation technologies, engineering cells that effectively colonise plastic surfaces is crucial.</p>
                 </div>
                 <div class="scroll-image">
-                    <img src="/2024_Edinburgh/docs/img/jeff.jpeg" alt="Research Approach Visualization">
+                    <img src="/2024_Edinburgh/docs/img/plastic-eating-bacteria.jpg" alt="Research Approach Visualization">
                 </div>
             </section>
             
             <section class="scroll-section" id="section3">
                 <div class="scroll-text">
-                    <h2>Key Findings</h2>
-                    <h3>Breakthrough Discoveries</h3>
-                    <p>Highlight our key research findings here. Discuss the most important results.</p>
+                    <h2><em>Our Research</em></h2>
+                    <h3>We aimed to achieve enhanced plastic colonization through the Directed Evolution of two <em>Escherichia coli</em> cell surface proteins: Curli subunit CsgA and Antigen 43 (Ag43)</h3>
+                    <p>Prior research in the Sadler lab at the University of Edinburgh demonstrated that overexpression of plasmid-encoded cell surface proteins Ag43 and Curli in <em>E.Coli</em> enhances plastic adhesion. We used a combination of site-specific and random mutagenesis of Curli subunit CsgA and Ag43 to enhance <em>E.coli's</em> adherence to polystyrene.</p>
                 </div>
                 <div class="scroll-image">
-                    <img src="/api/placeholder/600/400" alt="Key Findings Visualization">
+                    <img src="/2024_Edinburgh/docs/img/Ag43CsgA2.png" alt="Key Findings Visualization">
                 </div>
             </section>
             
             <section class="scroll-section" id="section4">
                 <div class="scroll-text">
-                    <h2>Impact</h2>
-                    <h3>Transforming the Field</h3>
-                    <p>Discuss the potential impact of our research here. Explain how our findings could change the industry or benefit society.</p>
+                    <h2><em>Key Findings</em></h2>
+                    <h3>We identified 54 mutations in the CsgA subunit that resulted in significant improvements in polystyrene adhesion</h3>
+                    <p>Notably, 21 of these mutations were present at position T71 on CsgA. We speculate that mutations at this site might have led to a significant difference in biofilm formation as this residue is located at the centre of an exposed region in the protein. Two other sites, A79 and H73, were also identified, which displayed increased or decreased biolfilm formation, indicating that these sites may also be crucial for plastic adherence.<br><br> Unfortunately, our work on Ag43 was unsuccessful due to issues in our methods, and we were unable to gather results in time for the submission of our report.</p>
                 </div>
                 <div class="scroll-image">
-                    <img src="/api/placeholder/600/400" alt="Research Impact Visualization">
+                    <img src="/2024_Edinburgh/docs/img/csgasites.png" alt="Research Impact Visualization">
                 </div>
             </section>
             
             <section class="scroll-section" id="section5">
                 <div class="scroll-text">
-                    <h2>Future Directions</h2>
-                    <h3>Next Steps in Research</h3>
-                    <p>Outline future directions for our research here. Discuss potential next steps and areas for further exploration.</p>
+                    <h2><em>Future Directions</em></h2>
+                    <h3>While our work has successfully improved polystyrene adhesion of CsgA, there are several avenues of work which need to be conducted in order to further this technology</h3>
+                    <p>A future avenue of our project is combining the significant mutations that we have identified to further increase adhesion. Additionally, our work exclusively focused on adhesion to polystyrene. Further work is required to determine whether the mutations identified in our work applies to increased adhesion to other types of plastic. <br>While our work on Ag43 was unsuccessful, we have identified several sites which could be potential mutation targets to improve plastic adherence via various computational methods.</p>
                 </div>
                 <div class="scroll-image">
-                    <img src="/api/placeholder/600/400" alt="Future Directions Visualization">
+                    <img src="/2024_Edinburgh/docs/img/futuredirections.png" alt="Future Directions Visualization">
                 </div>
             </section>
         </div>

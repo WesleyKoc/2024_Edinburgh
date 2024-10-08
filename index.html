@@ -5,8 +5,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="/2024_Edinburgh/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes shuffle {
+            0% { transform: translateX(-10px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        .animate-fade-in { animation: fadeIn 1s ease-out; }
+        .animate-slide-up { animation: slideUp 1s ease-out; }
+        .animate-shuffle { animation: shuffle 0.5s ease-out; }
+        
+        #header-text {
+            display: inline-block;
+            position: relative;
+            font-size: 2.58rem;
+            line-height: 1.3;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        #header-text span {
+            position: relative;
+            display: inline-block;
+            animation: doubleHelix 4s infinite ease-in-out;
+        }
+        @keyframes doubleHelix {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        .spotify-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .spotify-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .spotify-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        #imagePanel {
+            position: relative;
+            overflow: hidden;
+            color: green;
+        }
+
+        #imagePanel img {
+            transition: transform 0.5s ease;
+        }
+
+        
+    </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <nav class="navbar">
         <div class="logo-placeholder">
         <img src= "/2024_Edinburgh/docs/img/logo.png">
@@ -27,10 +89,41 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
-
-    <main class="content-section">
-        <div class="content-placeholder">Add content here</div>
+    
+   <main class="flex-grow flex flex-col md:flex-row">
+        <div class="md:w-1/2 bg-green-100 p-8 flex flex-col justify-center">
+            <h1 id="header-text" class="text-3xl md:text-5xl font-bold mb-6">Directed Evolution of Proteins for enhanced adhesion to plastics</h1>
+            <p class="text-xl md:text-2xl mb-6 animate-slide-up"><i>Welcome! We are excited to share our project with you!</i></p>
+            <div class="flex flex-row items-center space-x-4 animate-fade-in">
+                <button id="leftBtn" class="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors">
+                    ←
+                </button>
+                <div id="textbox" class="flex-grow bg-white p-4 rounded-lg shadow-md text-center text-lg animate-shuffle">
+                    Directed Evolution is a Nobel Prize winning technique used to engineer proteins to perform a desired function
+                </div>
+                <button id="rightBtn" class="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors">
+                    →
+                </button>
+            </div>
+        </div>
+        <div id="imagePanel" class="md:w-1/2 bg-slate-50 flex items-center justify-center p-4">
+            <img src="/2024_Edinburgh/docs/img/DE.jpg" alt="Directed Evolution" class="w-full h-full object-cover rounded-lg shadow-lg">
+        </div>
     </main>
+
+    <!-- Spotify section-->
+    <section class="spotify-section bg-green-100">
+        <div class="spotify-container">
+            <h2 class="spotify-title">Listen to the Edinburgh IDEC Playlist</h2>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/24rxDq11GeFjfzStcz1hGa?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
+                    width="100%" 
+                    height="380" 
+                    frameborder="0" 
+                    allowtransparency="true" 
+                    allow="encrypted-media"
+                    style="max-width: 660px;"></iframe>
+        </div>
+    </section>
 
     <footer class="end-section">
         <div class="location-container">
@@ -44,5 +137,73 @@
             <img src="/2024_Edinburgh/docs/img/Oursupporters-removebg-preview.png" alt="Our Supporters" class="funders-image">
         </div>
     </footer>
+
+    <script>
+        const shuffleTexts = [
+            "Directed Evolution is a Nobel Prize-winning technique used to engineer proteins to perform a desired function",
+            "It involves subjecting the gene to iterative rounds of mutation, then selecting the variant which produces the desired outcome",
+            "Our project focuses on enhancing protein adhesion to plastics. Check out our project description to learn more!",
+            "We're using cutting-edge biotechnology to solve real-world problems",
+            "Don't forget to listen to the Edinburgh IDEC playlist (collated by the team) as you peruse our research!"
+        ];
+        let currentTextIndex = 0;
+        let hue = 0;
+
+        function updateText() {
+            const textbox = document.getElementById('textbox');
+            textbox.style.animation = 'none';
+            textbox.offsetHeight; // Trigger reflow
+            textbox.style.animation = null;
+            textbox.textContent = shuffleTexts[currentTextIndex];
+        }
+
+        function onLeft() {
+            currentTextIndex = (currentTextIndex - 1 + shuffleTexts.length) % shuffleTexts.length;
+            updateText();
+        }
+
+        function onRight() {
+            currentTextIndex = (currentTextIndex + 1) % shuffleTexts.length;
+            updateText();
+        }
+
+        function updateHue() {
+            hue = (hue + 5) % 360;
+            document.getElementById('imagePanel').style.filter = `hue-rotate(${hue}deg)`;
+        }
+
+        document.getElementById('leftBtn').addEventListener('click', onLeft);
+        document.getElementById('rightBtn').addEventListener('click', onRight);
+
+        setInterval(() => {
+            currentTextIndex = (currentTextIndex + 1) % shuffleTexts.length;
+            updateText();
+        }, 10000);
+
+        setInterval(updateHue, 50);
+
+        // Double helix animation for header
+        const headerText = document.getElementById('header-text');
+        const text = headerText.textContent;
+        headerText.innerHTML = text.split(' ').map(word => 
+            `<span>${word}</span>`
+        ).join(' ');
+
+        const spans = headerText.querySelectorAll('span');
+        spans.forEach((span, index) => {
+            span.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Color shifting for header text with darker hues
+         function shiftHeaderColors() {
+            spans.forEach((span, index) => {
+                const hue = (index * 10 + Date.now() / 50) % 360;
+                span.style.color = `hsl(${hue}, 70%, 30%)`; // Darker colors
+            });
+            requestAnimationFrame(shiftHeaderColors);
+        }
+
+        shiftHeaderColors();
+    </script>
 </body>
 </html>

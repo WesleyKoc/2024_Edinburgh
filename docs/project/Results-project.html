@@ -10,6 +10,54 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide-react/0.263.1/lucide-react.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+<style>
+      #intro {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-bottom: solid 5px;
+        }
+
+        .introphoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    opacity: 0.9;
+}
+
+        .intro-text {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: slideIn 1s ease-out forwards;
+            
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -30%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+    
+    
+    
+    
+    
+</style>
 </head>
 <body>
     <nav class="navbar">
@@ -32,6 +80,10 @@
             <a href="/2024_Edinburgh/docs/humanpractices/humanpractices.html">Human practices</a>
         </div>
     </nav>
+    <div id="intro">
+        <img src="/2024_Edinburgh/docs/img/bacteriasticking.png" alt="Arthurs seat" class="introphoto">
+        <div class="intro-text">Results</div>
+    </div>
 
     <div id="results-root"></div>
 
@@ -52,95 +104,81 @@
         const { ChevronDown } = window.lucideReact || {};
 
         const ResultsSection = () => {
-            const [activeSection, setActiveSection] = React.useState(null);
+    const [activeSection, setActiveSection] = React.useState(null);
 
-            const sections = [
+    const sections = [
+        { 
+            id: '1.0', 
+            title: 'Computational Analysis and Site Selection for Mutagenesis',
+            content: (
+                <div className="space-y-6">
+                    <h3 className="text-2xl font-bold">1.0.1 Antigen 43</h3>
+                    <p>
+                        Ag43 undergoes an autocatalytic cleavage between the (α) passenger and (β) autochaperone domains (Vo et al., 2022). The beta-domain (β) stays embedded in the cell surface membrane, while the α-domain (α) is cleaved. The passenger (α) domain then associates with the β domain via non-covalent interactions (Figure 2.), and is responsible for the direct adhesion mechanism to abiotic surfaces. Meanwhile, the translocator domain (β) anchors the passenger (α) domain to the cell membrane. Therefore, we targeted the autocatalytic cleavage site as we hypothesised that inhibiting this cleavage could strengthen the association of the passenger domain with the cell surface by conserving the covalent interactions between the functional (α) and the membrane-embedded (β) domain.
+                    </p>
+                    <p>
+                        The specific cleavage site varies among Ag43 variants but localises between the β-helix and the predicted autochaperone (AC) domain (Vo et al., 2022). Potential cleavage sites were predicted based on sequence similarity between multiple strains of E. coli and ours, of which CFT073 was the most similar (Klemm et al., 2003). The predicted cleavage sites in CFT073 are between D500/P501 and D499/P500. We identified these residues within the expected region of pBAD-Ag43, specifically at D551/P552. This is the only instance of a D and P residue appearing consecutively within the entire amino acid residue sequence. As a result, we selected these sites for site-specific mutagenesis.
+                    </p>
+                    <p>
+                        Additionally, we identified several other sites on the passenger domain which could be targets for mutation using a Frustratometer analysis (Supplementary) and PyMol (The PyMOL Molecular Graphics System, Version 3.0 Schrödinger, LLC).
+                    </p>
+
+                    <h3 className="text-2xl font-bold mt-8">1.0.2 CsgA</h3>
+                    <p>
+                        For CsgA, 33 potential target sites were identified for site-specific mutagenesis (Figures 1, 2 and 3). These sites were selected by excluding those identified as crucial for structure or function. For instance, 'gatekeeper residues' found in R1-R5 were omitted as these are conserved and essential for native protein folding (Wang et al, 2009). Additionally, we excluded residues identified as being highly perturbed or immobile (DeBenedictis, Liu, and Keten, 2016). Highly perturbed residues confer a high degree of flexibility to the protein which are likely significant for binding to abiotic surfaces. Additionally, we hypothesised that immobile residues are important in maintaining structural integrity of the protein, thus, we also excluded these sites.
+                    </p>
+                    <p>
+                        Finally, we excluded residues from R1 and R5 as they have been implicated in directing CsgA's response to CsgB-mediated nucleation, and are therefore critical for the elongation of the Curli fibre. Additionally, previous data has suggested R1 and R5 are functionally redundant in mediating adhesion (Wang et al., 2009). This left us with 33 targets for megaprimer design, of which only 27 were considered due to time constraints.
+                    </p>
+                    <img src="/2024_Edinburgh/docs/img/Figure1.png" alt="Figure1results" className="w-full mb-4 rounded-lg shadow-md"/>
+                    <img src="/2024_Edinburgh/docs/img/Figure2redone.png" alt="Figure1results" className="w-full mb-4 rounded-lg shadow-md"/>
+                    <img src="/2024_Edinburgh/docs/img/Figure3.png" alt="Figure1results" className="w-full mb-4 rounded-lg shadow-md"/>
+                </div>
+            )
+        },
                 { 
-                    id: '3.0', 
-                    title: 'Computational Analysis and Site Selection for Mutagenesis',
-                    content: (
-                        <div>
-                            <p className="mb-4">Our computational analysis revealed key sites for mutagenesis in the CsgA and Ag43 proteins. We identified 3 potential sites in CsgA and 2 in Ag43 that could significantly affect biofilm formation.</p>
-                            <img src="/api/placeholder/600/400" alt="Protein structure highlighting mutation sites" className="w-full mb-4 rounded-lg shadow-md" />
-                            <p className="mb-4">Figure 1: 3D model of CsgA protein with highlighted mutation sites.</p>
-                            <table className="w-full border-collapse border border-gray-300 mb-4">
-                                <thead>
-                                    <tr className="bg-gray-100">
-                                        <th className="border border-gray-300 p-2">Protein</th>
-                                        <th className="border border-gray-300 p-2">Mutation Site</th>
-                                        <th className="border border-gray-300 p-2">Predicted Effect</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className="border border-gray-300 p-2">CsgA</td>
-                                        <td className="border border-gray-300 p-2">Arg45</td>
-                                        <td className="border border-gray-300 p-2">Increased biofilm formation</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="border border-gray-300 p-2">CsgA</td>
-                                        <td className="border border-gray-300 p-2">Gly78</td>
-                                        <td className="border border-gray-300 p-2">Decreased biofilm formation</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="border border-gray-300 p-2">Ag43</td>
-                                        <td className="border border-gray-300 p-2">Lys123</td>
-                                        <td className="border border-gray-300 p-2">Altered surface adhesion</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    )
-                },
+                    id: '1.1', 
+            title: 'Amplification: CsgA gene, CsgA vector, Ag43 gene, Ag43 vector',
+            content: (
+                <div className="space-y-4">
+                    <p>
+                        CsgA and Ag43 vectors were amplified from the pBAD plasmids to be used for Gibson reactions at a later stage. Additionally, we amplified CsgA and Ag43 genes. These were used to confirm that the Gibson Assembly was working, as a positive control.
+                    </p>
+                </div>
+            )
+        },
                 { 
-                    id: '3.1', 
-                    title: 'Amplification: CsgA gene, CsgA vector, Ag43 gene, Ag43 vector',
-                    content: (
-                        <div>
-                            <p className="mb-4">We successfully amplified the CsgA and Ag43 genes, as well as their respective vectors. The gel electrophoresis results confirmed the expected band sizes.</p>
-                            <img src="/api/placeholder/600/400" alt="Gel electrophoresis results" className="w-full mb-4 rounded-lg shadow-md" />
-                            <p className="mb-4">Figure 2: Gel electrophoresis results showing successful amplification of CsgA and Ag43 genes and vectors.</p>
-                        </div>
-                    )
-                },
-                { 
-                    id: '3.2', 
-                    title: 'CsgA Error-Prone results',
-                    content: (
-                        <div>
-                            <p className="mb-4">The error-prone PCR for CsgA resulted in a library of mutants. Sequencing revealed an average of 2-3 mutations per gene.</p>
-                            <table className="w-full border-collapse border border-gray-300 mb-4">
-                                <thead>
-                                    <tr className="bg-gray-100">
-                                        <th className="border border-gray-300 p-2">Mutant</th>
-                                        <th className="border border-gray-300 p-2">Mutation(s)</th>
-                                        <th className="border border-gray-300 p-2">Observed Effect</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className="border border-gray-300 p-2">CsgA-M1</td>
-                                        <td className="border border-gray-300 p-2">A45T, G78S</td>
-                                        <td className="border border-gray-300 p-2">Enhanced biofilm formation</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="border border-gray-300 p-2">CsgA-M2</td>
-                                        <td className="border border-gray-300 p-2">R56H</td>
-                                        <td className="border border-gray-300 p-2">Reduced biofilm formation</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="border border-gray-300 p-2">CsgA-M3</td>
-                                        <td className="border border-gray-300 p-2">L34P, Q89R, T102A</td>
-                                        <td className="border border-gray-300 p-2">No significant change</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    )
-                },
+            id: '1.2', 
+            title: 'CsgA Error-Prone PCR Results',
+            content: (
+                <div className="space-y-4">
+                    <p>
+                        Error-prone PCR (epPCR) is a common way to introduce mutations and can be quick and easy. Due to this, we decided to use this as our first approach. epPCR was performed based on the standard PCR protocol using Taq polymerase, by NEB labs, as stated in the methods section. We modified the protocol by replacing some of the water with MgCl<sub>2</sub> and MnCl<sub>2</sub> solutions at different concentrations.
+                    </p>
+                    <p>
+                        From the final concentrations of 7 mM MgCl<sub>2</sub> and 0.5 mM MnCl<sub>2</sub> in the PCR reaction, these concentrations were systematically reduced down to 5 mM MgCl<sub>2</sub> and 0.075 mM MnCl<sub>2</sub>. These specific final concentrations were chosen using standard PCR reactions with only either MgCl<sub>2</sub> or MnCl<sub>2</sub> added into the solution, reducing the concentrations until distinct bands of correct sizes were generated as shown in Figure 5.
+                    </p>
+                          <div className="mt-4">
+                        <img src="/2024_Edinburgh/docs/img/Figure5.png" alt="Error-prone PCR gel electrophoresis results" className="w-full mb-4 rounded-lg shadow-md" />
+                        <p className="text-sm text-gray-600"></p>
+                    </div>
+                    <p>
+                        Error-prone PCR successfully generated products at the correct size of 500 bp. All three were under the same PCR reaction and condition, however CsgA ep1 was removed at this stage as the band was smeared on the gel. The combined libraries of both ep2 and 3 were purified and sent for Sanger Sequencing to check the presence of mutations and to determine the mutation rate.
+                    </p>
+                    <p>
+                        Our Sanger sequencing results revealed that no mutations had been generated by epPCR, as no nucleotides were highlighted in red, as shown in figure 6 (MRC PPU DNA Sequencing & Services). Therefore, we did not perform the biofilm assay on our epPCR products.
+                    </p>
+                     <div className="mt-4">
+                        <img src="/2024_Edinburgh/docs/img/Figure6.png" alt="Error-prone PCR gel electrophoresis results" className="w-full mb-4 rounded-lg shadow-md" />
+                        <p className="text-sm text-gray-600"></p>
+                    </div>
+                 
+                </div>
+            )
+        },
                 
                 { 
-                    id: '3.3', 
+                    id: '1.3', 
                     title: 'Amplification: CsgA and Ag43 Megaprimer Full-Length Results',
                     content: (
                         <div>
@@ -150,25 +188,46 @@
                 },
                 
                 { 
-                    id: '3.4', 
-                    title: 'Ag43 Inverse PCR Results',
-                    content: (
-                        <div>
-                            
-                        </div>
-                    )
-                },
+            id: '1.4', 
+            title: 'Ag43 Inverse PCR Results',
+            content: (
+                <div className="space-y-4">
+                    <p>
+                        After abandoning megaprimer synthesis for the Ag43 cleavage site, we moved onto using inverse PCR. With an annealing temperature of 70 ℃, the correct band for the D551 site was visualised, gel extracted and ligated using T4 ligase. However, we failed to get a product for P552 despite conducting many repeats. Therefore, we decided to exclude P552, as in theory, mutations in D551 would be sufficient for impeding cleavage.
+                    </p>
+                    <p>
+                        Unfortunately, although transformation of the recircularized plasmid carrying the D551 mutation into C2987 cells  was successful, transforming into the MG1655(DK) cells failed multiple times, and this couldn't be resolved. We suspect that the recircularization was unsuccessful to begin with, and could be missing regions of the plasmid, which is why it would not transform DK cells and we would see no growth on the ampicillin LB agar. Since time was quite 
+                    </p>
+                
+                </div>
+            )
+        },
                 { 
-                    id: '3.5', 
-                    title: 'Baseline Biofilm Comparison',
-                    content: (
-                        <div>
-                            
-                        </div>
-                    )
-                },
+            id: '1.5', 
+            title: 'Baseline Biofilm Comparison',
+            content: (
+                <div className="space-y-4">
+                    <p>
+                        We performed the assay protocol using the wild type MG1655 strain as a control, as well as MG1655 strain carrying either the pBAD-Curli or pBAD-Ag43 plasmid. On each plate half of the wells were induced for expression of the appropriate gene with arabinose, and the rest were non-induced.
+                    </p>
+                    <p>
+                        The first series of plates showed no change in absorbance. This was later revealed to be due to a failure in making up the M63 media correctly. The next series of plates showed gradients in absorbance, with the majority showing an increasing top-down gradient. This was corrected by switching to a different incubator, as we have hypothesized that the previous incubator was producing a temperature gradient.
+                    </p>
+                    <p>
+                        Following troubleshooting, reasonably consistent data was obtained for each strain, induced or non-induced. However, due to human error there were still variations within the plate. This was rectified by using the Edinburgh Genome Foundry (EGF), a research facility with an impressive highly automated robotic platform, who generously performed our assay with their robotic colony picker and acoustic dispenser. The EGF further modified our protocol for their equipment to prevent 'splashing' of solutions between wells.
+                    </p>
+                    <p>
+                        As shown in Figure 12, the improved protocol does obtain consistent results. To compare the induced and non-induced results, we conducted a student's t-test. This shows that the induction of Curli gives a very significant increase in biofilm formation, but this is not the case for Ag43. In light of these results, we decided to shift more focus to CsgA than Ag43.
+                    </p>
+                    <div className="mt-4">
+                        <img src="/2024_Edinburgh/docs/img/Figure12.png" alt="Baseline Biofilm Comparison Results" className="w-full mb-4 rounded-lg shadow-md" />
+                        <p className="text-sm text-gray-600"></p>
+                    </div>
+                </div>
+            )
+        },
                 { 
-                    id: '3.6', 
+                    id: '1.6', 
                     title: 'CsgA Biofilm Results',
                     content: (
                         <div>
@@ -177,8 +236,26 @@
                     )
                 },
                 { 
-                    id: '3.7', 
+                    id: '1.7', 
                     title: 'Oxford-Nanopore Sequencing Results',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+                { 
+                    id: '1.8', 
+                    title: 'References',
+                    content: (
+                        <div>
+                            
+                        </div>
+                    )
+                },
+                { 
+                    id: '1.9', 
+                    title: 'Supplementary information',
                     content: (
                         <div>
                             
@@ -188,32 +265,31 @@
             ];
 
             const toggleSection = (id) => {
-                setActiveSection(activeSection === id ? null : id);
-            };
+        setActiveSection(activeSection === id ? null : id);
+    };
 
-            return (
-                <div className="max-w-4xl mx-auto p-6">
-                    <h2 className="text-3xl font-bold mb-8 text-center text-indigo-700">Results</h2>
-                    {sections.map((section) => (
-                        <div key={section.id} className="mb-4 border-b border-gray-200 pb-4">
-                            <button
-                                className="w-full px-4 py-3 text-left font-semibold flex justify-between items-center focus:outline-none hover:bg-gray-50 rounded-lg transition-colors duration-200"
-                                onClick={() => toggleSection(section.id)}
-                            >
-                                <span className="text-lg">{section.id} {section.title}</span>
-                                {ChevronDown && <ChevronDown size={24} />}
-                            </button>
-                            {activeSection === section.id && (
-                                <div className="p-4 mt-2">
-                                    {section.content}
-                                </div>
-                            )}
+    return (
+        <div className="max-w-4xl mx-auto p-6">
+            <h2 className="text-3xl font-bold mb-8 text-center text-indigo-700">Click on tabs to expand</h2>
+            {sections.map((section) => (
+                <div key={section.id} className="mb-4 border-b border-gray-200 pb-4">
+                    <button
+                        className="w-full px-4 py-3 text-left font-semibold flex justify-between items-center focus:outline-none hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                        onClick={() => toggleSection(section.id)}
+                    >
+                        <span className="text-lg">{section.id} {section.title}</span>
+                        {ChevronDown && <ChevronDown size={24} />}
+                    </button>
+                    {activeSection === section.id && (
+                        <div className="p-4 mt-2">
+                            {section.content}
                         </div>
-                    ))}
+                    )}
                 </div>
-            );
-        };
-
+            ))}
+        </div>
+    );
+};
         ReactDOM.render(<ResultsSection />, document.getElementById('results-root'));
     </script>
 </body>
