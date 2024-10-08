@@ -111,7 +111,7 @@
         </div>
     </main>
 
-    <!-- Spotify section with matching background -->
+    <!-- Spotify section-->
     <section class="spotify-section bg-green-100">
         <div class="spotify-container">
             <h2 class="spotify-title">Listen to the Edinburgh IDEC Playlist</h2>
@@ -140,7 +140,7 @@
 
     <script>
         const shuffleTexts = [
-            "Directed Evolution is a Nobel Prize winning technique used to engineer proteins to perform a desired function",
+            "Directed Evolution is a Nobel Prize-winning technique used to engineer proteins to perform a desired function",
             "It involves subjecting the gene to iterative rounds of mutation, then selecting the variant which produces the desired outcome",
             "Our project focuses on enhancing protein adhesion to plastics. Check out our project description to learn more!",
             "We're using cutting-edge biotechnology to solve real-world problems",
@@ -195,7 +195,7 @@
         });
 
         // Color shifting for header text with darker hues
-        function shiftHeaderColors() {
+         function shiftHeaderColors() {
             spans.forEach((span, index) => {
                 const hue = (index * 10 + Date.now() / 50) % 360;
                 span.style.color = `hsl(${hue}, 70%, 30%)`; // Darker colors
@@ -203,6 +203,7 @@
             requestAnimationFrame(shiftHeaderColors);
         }
 
+        shiftHeaderColors();
     </script>
 </body>
 </html>
